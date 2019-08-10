@@ -19,4 +19,25 @@
     </modules>
     <artifactId>minion-core</artifactId>
 
+    <properties>
+        <modelmapper.version>2.3.0</modelmapper.version>
+        <hutool.version>4.6.1</hutool.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
+            </dependency>
+            <!--Hutool-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 </project>
