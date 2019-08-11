@@ -1,4 +1,4 @@
-package cn.dhbin.minion.core.tool.mvc;
+package cn.dhbin.minion.core.restful.response;
 
 import lombok.*;
 
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class FailResponse implements ApiResponse {
+public class FailResponse extends ApiResponse {
 
     private static final long serialVersionUID = -370100022512444057L;
 
@@ -30,6 +30,9 @@ public class FailResponse implements ApiResponse {
      * 客户端是否展示
      */
     private Boolean show;
+
+    private String exception;
+
     /**
      * 当前时间戳
      */

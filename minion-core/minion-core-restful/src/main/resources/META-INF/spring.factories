@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.dhbin.minion.core.restful.config.WebAutoConfiguration

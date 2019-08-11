@@ -1,11 +1,11 @@
-package cn.dhbin.minion.core.tool.mvc;
+package cn.dhbin.minion.core.restful.response;
 
 /**
  * 错误代码
  *
  * @author donghaibin
  */
-public interface IErrorCode {
+public interface IErrorCode<T> {
 
     /**
      * 获取状态码
@@ -27,4 +27,11 @@ public interface IErrorCode {
      * @return 是否显示
      */
     Boolean isShow();
+
+    /**
+     * 转换实体对象
+     *
+     * @return T
+     */
+    T convert();
 }

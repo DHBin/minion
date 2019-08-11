@@ -1,4 +1,4 @@
-package cn.dhbin.minion.core.tool.mvc;
+package cn.dhbin.minion.core.restful.response;
 
 import lombok.*;
 
@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class SuccessResponse<T> implements ApiResponse<T> {
+public class SuccessResponse<T> extends ApiResponse<T> {
 
     private static final long serialVersionUID = -5169649996163409698L;
 
