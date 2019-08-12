@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
  */
 public class ApiResponse<T> implements Serializable {
 
+    private static final long serialVersionUID = 5464910662322777161L;
+
     /**
      * 成功
      *

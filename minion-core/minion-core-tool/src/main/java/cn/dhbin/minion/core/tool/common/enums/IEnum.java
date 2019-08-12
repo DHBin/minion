@@ -1,4 +1,4 @@
-package cn.dhbin.minion.core.restful.enums;
+package cn.dhbin.minion.core.tool.common.enums;
 
 /**
  * 通用枚举

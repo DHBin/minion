@@ -1,8 +1,7 @@
 package cn.dhbin.minion.core.restful.spring;
 
-import cn.dhbin.minion.core.restful.enums.IEnum;
+import cn.dhbin.minion.core.tool.common.enums.IEnum;
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.TypeUtil;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 

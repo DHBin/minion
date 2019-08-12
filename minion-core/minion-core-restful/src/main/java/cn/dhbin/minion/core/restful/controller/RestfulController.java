@@ -1,11 +1,7 @@
 package cn.dhbin.minion.core.restful.controller;
 
 import cn.dhbin.minion.core.restful.response.ApiResponse;
-import cn.dhbin.minion.core.restful.response.FailResponse;
-import cn.dhbin.minion.core.restful.response.IErrorCode;
 import cn.dhbin.minion.core.restful.response.SuccessResponse;
-
-import java.time.LocalDateTime;
 
 /**
  * Restful Controller
@@ -16,10 +12,11 @@ import java.time.LocalDateTime;
 public class RestfulController {
 
     protected <T> SuccessResponse<T> success(T object) {
-        return SuccessResponse.<T>builder()
-                .status(0)
-                .result(object)
-                .build();
+        return ApiResponse.success(object);
+    }
+
+    protected SuccessResponse<Void> success() {
+        return ApiResponse.success(null);
     }
 
 }
