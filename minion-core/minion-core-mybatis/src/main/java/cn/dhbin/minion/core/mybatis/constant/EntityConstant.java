@@ -1,4 +1,4 @@
-package cn.dhbin.minion.core.mybatis.config;
+package cn.dhbin.minion.core.mybatis.constant;
 
 /**
  * @author donghaibin

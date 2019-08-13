@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.dhbin.minion.core.mybatis.config.MybatisPlusConfiguration,\
-cn.dhbin.minion.core.mybatis.config.DefaultMetaObjectHandler
+cn.dhbin.minion.core.mybatis.config.MybatisPlusConfiguration
