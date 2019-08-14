@@ -16,6 +16,11 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusConfiguration {
 
     /**
+     * 基础枚举包名
+     */
+    private final static String BASE_ENUM_PACKAGE = "cn.dhbin.minion.core.mybatis.enums";
+
+    /**
      * 分页
      *
      * @return 分页插件
@@ -31,9 +36,15 @@ public class MybatisPlusConfiguration {
     @Bean
     public MybatisPlusPropertiesCustomizer mybatisPlusPropertiesCustomizer() {
         return mybatisPlusProperties -> {
+            // 关闭banner
             mybatisPlusProperties.getGlobalConfig().setBanner(false);
-            mybatisPlusProperties.setTypeEnumsPackage("cn.dhbin.minion.core.mybatis.enums");
-
+            String typeEnumsPackage = mybatisPlusProperties.getTypeEnumsPackage();
+            // 拼接基础枚举包
+            if (typeEnumsPackage.length() > 0) {
+                mybatisPlusProperties.setTypeEnumsPackage(typeEnumsPackage + "," + BASE_ENUM_PACKAGE);
+            } else {
+                mybatisPlusProperties.setTypeAliasesPackage(BASE_ENUM_PACKAGE);
+            }
         };
     }
 

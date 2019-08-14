@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Getter
-public enum StatusEnum implements IEnum {
+public enum StatusEnum implements IEnum<Integer> {
 
     /**
      * 禁用
@@ -25,14 +25,14 @@ public enum StatusEnum implements IEnum {
     NORMAL(1, "正常");
 
     @EnumValue
-    private final int status;
+    private final Integer status;
 
     @JsonValue
     private final String msg;
 
 
     @Override
-    public int getValue() {
+    public Integer getValue() {
         return this.status;
     }
 
