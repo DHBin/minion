@@ -1,6 +1,7 @@
 package cn.dhbin.minion.core.mybatis.config;
 
 import cn.dhbin.minion.core.common.IUserInfoProvider;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
@@ -41,7 +42,7 @@ public class MybatisPlusConfiguration {
             mybatisPlusProperties.getGlobalConfig().setBanner(false);
             String typeEnumsPackage = mybatisPlusProperties.getTypeEnumsPackage();
             // 拼接基础枚举包
-            if (typeEnumsPackage.length() > 0) {
+            if (StrUtil.length(typeEnumsPackage) > 0) {
                 mybatisPlusProperties.setTypeEnumsPackage(typeEnumsPackage + "," + BASE_ENUM_PACKAGE);
             } else {
                 mybatisPlusProperties.setTypeAliasesPackage(BASE_ENUM_PACKAGE);
