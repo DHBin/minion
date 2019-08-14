@@ -45,7 +45,7 @@ public class MybatisPlusConfiguration {
             if (StrUtil.length(typeEnumsPackage) > 0) {
                 mybatisPlusProperties.setTypeEnumsPackage(typeEnumsPackage + "," + BASE_ENUM_PACKAGE);
             } else {
-                mybatisPlusProperties.setTypeAliasesPackage(BASE_ENUM_PACKAGE);
+                mybatisPlusProperties.setTypeEnumsPackage(BASE_ENUM_PACKAGE);
             }
         };
     }
