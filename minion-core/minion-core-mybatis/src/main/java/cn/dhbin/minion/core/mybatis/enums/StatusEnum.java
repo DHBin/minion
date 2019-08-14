@@ -1,6 +1,6 @@
 package cn.dhbin.minion.core.mybatis.enums;
 
-import cn.dhbin.minion.core.tool.common.enums.IEnum;
+import cn.dhbin.minion.core.common.IEnum;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;

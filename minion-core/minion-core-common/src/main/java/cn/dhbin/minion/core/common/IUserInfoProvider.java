@@ -1,4 +1,4 @@
-package cn.dhbin.minion.core.mybatis.config;
+package cn.dhbin.minion.core.common;
 
 /**
  * 用户id提供者

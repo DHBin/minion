@@ -29,6 +29,10 @@
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-tool</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

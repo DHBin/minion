@@ -55,6 +55,11 @@
                 <artifactId>minion-core-mybatis</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.dhbin</groupId>
+                <artifactId>minion-core-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

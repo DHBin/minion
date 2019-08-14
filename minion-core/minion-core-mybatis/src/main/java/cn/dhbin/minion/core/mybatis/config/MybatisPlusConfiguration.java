@@ -1,5 +1,6 @@
 package cn.dhbin.minion.core.mybatis.config;
 
+import cn.dhbin.minion.core.common.IUserInfoProvider;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;

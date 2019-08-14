@@ -1,6 +1,6 @@
 package cn.dhbin.minion.core.restful.spring;
 
-import cn.dhbin.minion.core.tool.common.enums.IEnum;
+import cn.dhbin.minion.core.common.IEnum;
 import cn.hutool.core.convert.Convert;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
@@ -39,7 +39,7 @@ public class IEnumConverterFactory implements ConverterFactory<String, IEnum> {
 
         private final Map<String, T> enumMap = new HashMap<>();
 
-        public IntegerStrToEnum(Class<T> enumType) {
+        IntegerStrToEnum(Class<T> enumType) {
             T[] enums = enumType.getEnumConstants();
             for (T e : enums) {
                 enumMap.put(Convert.toStr(e.getValue()), e);

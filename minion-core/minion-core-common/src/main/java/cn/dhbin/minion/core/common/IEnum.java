@@ -1,4 +1,4 @@
-package cn.dhbin.minion.core.tool.common.enums;
+package cn.dhbin.minion.core.common;
 
 import java.io.Serializable;
 
