@@ -19,4 +19,28 @@ public class RestfulController {
         return ApiResponse.success(null);
     }
 
+    protected <T> SuccessResponse<T> ok(T object) {
+        return ApiResponse.ok(object);
+    }
+
+    protected SuccessResponse<Void> ok() {
+        return ApiResponse.ok();
+    }
+
+    protected <T> SuccessResponse<T> created(T object) {
+        return ApiResponse.created(object);
+    }
+
+    protected SuccessResponse<Void> created() {
+        return ApiResponse.created();
+    }
+
+    protected <T> SuccessResponse<T> noContent(T object) {
+        return ApiResponse.noContent(object);
+    }
+
+    protected SuccessResponse<Void> noContent() {
+        return ApiResponse.noContent();
+    }
+
 }

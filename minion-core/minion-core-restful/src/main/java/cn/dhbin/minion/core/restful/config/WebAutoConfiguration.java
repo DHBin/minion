@@ -1,6 +1,7 @@
 package cn.dhbin.minion.core.restful.config;
 
 import cn.dhbin.minion.core.restful.config.props.LogConfigProperties;
+import cn.dhbin.minion.core.restful.config.props.MinionConfigProperties;
 import cn.dhbin.minion.core.restful.filter.WrapperRequestFilter;
 import cn.dhbin.minion.core.restful.log.DefaultLogHandler;
 import cn.dhbin.minion.core.restful.log.ILogHandler;
@@ -40,7 +41,7 @@ import java.util.List;
 )
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @AutoConfigureBefore({ErrorMvcAutoConfiguration.class})
-@EnableConfigurationProperties(LogConfigProperties.class)
+@EnableConfigurationProperties({LogConfigProperties.class, MinionConfigProperties.class})
 public class WebAutoConfiguration implements WebMvcConfigurer {
 
     /**

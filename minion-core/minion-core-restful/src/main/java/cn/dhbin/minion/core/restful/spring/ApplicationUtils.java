@@ -19,6 +19,9 @@
 
 package cn.dhbin.minion.core.restful.spring;
 
+import cn.dhbin.minion.core.restful.config.props.MinionConfigProperties;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -38,6 +41,13 @@ public class ApplicationUtils {
      * 全局的ApplicationContext
      */
     private final static ApplicationContext APPLICATION_CONTEXT = ApplicationContextRegister.getApplicationContext();
+
+    /**
+     * 是否开发模式
+     */
+    @Getter
+    @Setter
+    private static volatile Boolean dev;
 
     /**
      * 获取ApplicationContext
@@ -136,4 +146,22 @@ public class ApplicationUtils {
         return (Class<T>) APPLICATION_CONTEXT.getType(name);
     }
 
+
+    /**
+     * 是否开发环境
+     *
+     * @return 是否开发环境
+     */
+    public static Boolean isDev() {
+        if (getDev() == null) {
+            synchronized (ApplicationUtils.class) {
+                if (getDev() == null) {
+                    MinionConfigProperties minionConfigProperties = getBean(MinionConfigProperties.class);
+                    setDev(minionConfigProperties.getDev());
+                }
+
+            }
+        }
+        return getDev();
+    }
 }

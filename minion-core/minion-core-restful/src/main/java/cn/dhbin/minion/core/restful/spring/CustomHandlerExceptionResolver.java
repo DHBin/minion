@@ -97,11 +97,7 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
                 log.warn("Handling of [" + ex.getClass().getName() + "] resulted in Exception", handlerException);
             }
         }
-        if (response.getStatus() < HttpServletResponse.SC_INTERNAL_SERVER_ERROR) {
-            log.info("Info: doResolveInfo {}", ex.getMessage());
-        } else {
-            log.error("Error: doResolveException {}", ex);
-        }
+        log.error("Error: doResolveException ", ex);
         return MODEL_VIEW_INSTANCE;
     }
 

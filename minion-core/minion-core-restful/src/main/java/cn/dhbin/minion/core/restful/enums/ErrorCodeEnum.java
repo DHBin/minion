@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author donghaibin
- * @date 2019-08-10
  */
 @RequiredArgsConstructor
 public enum ErrorCodeEnum implements IErrorCode<FailResponse> {
@@ -16,6 +15,18 @@ public enum ErrorCodeEnum implements IErrorCode<FailResponse> {
      * 400
      */
     BAD_REQUEST(HttpServletResponse.SC_BAD_REQUEST, true, "请求参数错误或不完整"),
+    /**
+     * 更新数据失败
+     */
+    UPDATE_ERROR(HttpServletResponse.SC_BAD_REQUEST, true, "更新失败"),
+    /**
+     * 新建数据失败
+     */
+    CREATE_ERROR(HttpServletResponse.SC_BAD_REQUEST, true, "新建失败"),
+    /**
+     * 删除数据失败
+     */
+    DELETE_ERROR(HttpServletResponse.SC_BAD_REQUEST, true, "删除失败"),
     /**
      * JSON格式错误
      */
