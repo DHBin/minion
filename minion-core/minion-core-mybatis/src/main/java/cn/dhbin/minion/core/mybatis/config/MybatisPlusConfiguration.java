@@ -56,9 +56,4 @@ public class MybatisPlusConfiguration {
         return new DefaultMetaObjectHandler(userInfoProvider);
     }
 
-    @Bean
-    public MinionSqlInjector minionSqlInjector() {
-        return new MinionSqlInjector();
-    }
-
 }
