@@ -2,8 +2,11 @@ package cn.dhbin.minion.core.restful.spring;
 
 import cn.dhbin.minion.core.common.IEnum;
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
+import org.springframework.util.ReflectionUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +45,15 @@ public class IEnumConverterFactory implements ConverterFactory<String, IEnum> {
         IntegerStrToEnum(Class<T> enumType) {
             T[] enums = enumType.getEnumConstants();
             for (T e : enums) {
+                // 适配Jackson的@JsonValue注解
+                Class<? extends IEnum> enumClass = e.getClass();
+                ReflectionUtils.doWithFields(enumClass, field -> {
+                    JsonValue jsonValue = field.getAnnotation(JsonValue.class);
+                    if (jsonValue != null) {
+                        ReflectionUtils.makeAccessible(field);
+                        enumMap.put(StrUtil.toString(ReflectionUtils.getField(field, e)), e);
+                    }
+                });
                 enumMap.put(Convert.toStr(e.getValue()), e);
             }
         }

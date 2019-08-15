@@ -11,6 +11,10 @@ public interface EntityConstant {
      */
     static final String CREATE_TIME = "createTime";
     /**
+     * 创建时间-下划线形式
+     */
+    static final String CREATE_TIME_UNDER_LINE = "create_time";
+    /**
      * 修改时间
      */
     static final String UPDATE_TIME = "updateTime";
