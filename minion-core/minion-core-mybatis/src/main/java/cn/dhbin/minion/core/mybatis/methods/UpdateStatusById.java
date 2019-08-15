@@ -9,14 +9,14 @@ import org.apache.ibatis.mapping.SqlSource;
  * @author donghaibin
  * @date 2019-08-14
  */
-public class ChangeStatusById extends AbstractMethod {
+public class UpdateStatusById extends AbstractMethod {
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         String sql = "<script>\nUPDATE %s set status = #{status} WHERE %s=#{%s}\n</script>";
         sql = String.format(sql, tableInfo.getTableName(), tableInfo.getKeyColumn(), tableInfo.getKeyProperty());
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, Object.class);
-        return this.addUpdateMappedStatement(mapperClass, modelClass, "changeStatusById", sqlSource);
+        return this.addUpdateMappedStatement(mapperClass, modelClass, "updateStatusById", sqlSource);
     }
 
 }

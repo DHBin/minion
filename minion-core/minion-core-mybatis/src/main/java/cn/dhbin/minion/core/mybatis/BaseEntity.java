@@ -49,4 +49,15 @@ public class BaseEntity implements Convert {
      * 状态，1-正常，0-禁用
      */
     private StatusEnum status;
+
+    /**
+     * 如果状态为空进行赋值
+     *
+     * @param status 状态
+     */
+    public void setStatusIfNull(StatusEnum status) {
+        if (this.getStatus() == null) {
+            this.setStatus(status);
+        }
+    }
 }

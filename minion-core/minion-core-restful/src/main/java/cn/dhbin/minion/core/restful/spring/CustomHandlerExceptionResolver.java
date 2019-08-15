@@ -2,6 +2,7 @@ package cn.dhbin.minion.core.restful.spring;
 
 import cn.dhbin.minion.core.restful.enums.ErrorCodeEnum;
 import cn.dhbin.minion.core.restful.exception.ApiException;
+import cn.dhbin.minion.core.restful.response.IErrorCode;
 import cn.dhbin.minion.core.restful.util.ResponseUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import lombok.extern.slf4j.Slf4j;
@@ -97,7 +98,12 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
                 log.warn("Handling of [" + ex.getClass().getName() + "] resulted in Exception", handlerException);
             }
         }
-        log.error("Error: doResolveException ", ex);
+        if (ex instanceof ApiException) {
+            IErrorCode errorCode = ((ApiException) ex).getErrorCode();
+            log.info("Info: doResolveException [{}]", errorCode.getMsg());
+        } else {
+            log.error("Error: doResolveException ", ex);
+        }
         return MODEL_VIEW_INSTANCE;
     }
 

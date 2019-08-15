@@ -1,6 +1,7 @@
 package cn.dhbin.minion.core.mybatis.config;
 
-import cn.dhbin.minion.core.mybatis.methods.ChangeStatusById;
+import cn.dhbin.minion.core.mybatis.methods.UpdateStatus;
+import cn.dhbin.minion.core.mybatis.methods.UpdateStatusById;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 
@@ -15,7 +16,8 @@ public class MinionSqlInjector extends DefaultSqlInjector {
     @Override
     public List<AbstractMethod> getMethodList(Class<?> mapperClass) {
         List<AbstractMethod> methodList = super.getMethodList(mapperClass);
-        methodList.add(new ChangeStatusById());
+        methodList.add(new UpdateStatusById());
+        methodList.add(new UpdateStatus());
         return methodList;
     }
 }

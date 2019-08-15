@@ -20,7 +20,8 @@
 package cn.dhbin.minion.core.restful.spring;
 
 import cn.dhbin.minion.core.restful.config.props.MinionConfigProperties;
-import lombok.Getter;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -35,6 +36,7 @@ import java.util.Objects;
  * @author donghaibin
  * @date 2019-08-10
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApplicationUtils {
 
     /**
@@ -43,11 +45,10 @@ public class ApplicationUtils {
     private final static ApplicationContext APPLICATION_CONTEXT = ApplicationContextRegister.getApplicationContext();
 
     /**
-     * 是否开发模式
+     * 系统配置
      */
-    @Getter
     @Setter
-    private static volatile Boolean dev;
+    private static volatile MinionConfigProperties minionConfigProperties;
 
     /**
      * 获取ApplicationContext
@@ -153,15 +154,23 @@ public class ApplicationUtils {
      * @return 是否开发环境
      */
     public static Boolean isDev() {
-        if (getDev() == null) {
-            synchronized (ApplicationUtils.class) {
-                if (getDev() == null) {
-                    MinionConfigProperties minionConfigProperties = getBean(MinionConfigProperties.class);
-                    setDev(minionConfigProperties.getDev());
-                }
-
-            }
-        }
-        return getDev();
+        return getMinionConfigProperties().getDev();
     }
+
+    /**
+     * 获取系统配置
+     *
+     * @return 系统配置
+     */
+    public static MinionConfigProperties getMinionConfigProperties() {
+        /*
+         * 这里可能会出现重复赋值的情况，但getBean方法保证了单例，不加锁效率更高
+         * */
+        if (minionConfigProperties == null) {
+            MinionConfigProperties minionConfigProperties = getBean(MinionConfigProperties.class);
+            setMinionConfigProperties(minionConfigProperties);
+        }
+        return minionConfigProperties;
+    }
+
 }
