@@ -3,31 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>minion-core</artifactId>
+        <artifactId>minion-upms</artifactId>
         <groupId>cn.dhbin</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <description>restful</description>
 
-    <artifactId>minion-core-restful</artifactId>
+    <artifactId>minion-upms-biz</artifactId>
 
     <dependencies>
+        <!--注册中心客户端-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+        <!--配置中心客户端-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
+        <!--Web模块-->
         <dependency>
             <groupId>cn.dhbin</groupId>
-            <artifactId>minion-core-tool</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.dhbin</groupId>
-            <artifactId>minion-core-common</artifactId>
+            <artifactId>minion-core-restful</artifactId>
         </dependency>
     </dependencies>
 
