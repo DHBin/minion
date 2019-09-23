@@ -17,6 +17,7 @@
         <module>minion-core-mybatis</module>
         <module>minion-core-generate</module>
         <module>minion-core-common</module>
+        <module>minion-core-bom</module>
     </modules>
     <artifactId>minion-core</artifactId>
 

@@ -15,7 +15,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
-        <spring-boot.version>2.1.7.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
         <spring-cloud-alibaba.version>0.9.0.RELEASE</spring-cloud-alibaba.version>
         <modelmapper.version>2.3.0</modelmapper.version>
         <hutool.version>4.6.1</hutool.version>
@@ -69,6 +69,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--minion core-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>minion-core-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <!--Bean属性复制工具-->
             <dependency>
@@ -89,27 +97,6 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
-
-            <dependency>
-                <groupId>cn.dhbin</groupId>
-                <artifactId>minion-core-tool</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.dhbin</groupId>
-                <artifactId>minion-core-restful</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.dhbin</groupId>
-                <artifactId>minion-core-mybatis</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.dhbin</groupId>
-                <artifactId>minion-core-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

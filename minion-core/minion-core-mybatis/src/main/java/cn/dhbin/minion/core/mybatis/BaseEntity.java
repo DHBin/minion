@@ -1,6 +1,5 @@
 package cn.dhbin.minion.core.mybatis;
 
-import cn.dhbin.minion.core.mybatis.enums.StatusEnum;
 import cn.dhbin.minion.core.tool.converter.Convert;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -44,20 +43,4 @@ public class BaseEntity implements Convert {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
-
-    /**
-     * 状态，1-正常，0-禁用
-     */
-    private StatusEnum status;
-
-    /**
-     * 如果状态为空进行赋值
-     *
-     * @param status 状态
-     */
-    public void setStatusIfNull(StatusEnum status) {
-        if (this.getStatus() == null) {
-            this.setStatus(status);
-        }
-    }
 }
