@@ -1,4 +1,4 @@
-package cn.dhbin.minion.core.mybatis;
+package cn.dhbin.minion.core.common.entity;
 
 import cn.dhbin.minion.core.tool.converter.Convert;
 import com.baomidou.mybatisplus.annotation.FieldFill;

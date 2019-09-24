@@ -1,6 +1,6 @@
 package cn.dhbin.minion.core.mybatis.service;
 
-import cn.dhbin.minion.core.mybatis.BaseEntity;
+import cn.dhbin.minion.core.common.entity.BaseEntity;
 import cn.dhbin.minion.core.mybatis.mapper.MinionMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 

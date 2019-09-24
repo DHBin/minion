@@ -12,5 +12,16 @@
 
     <artifactId>minion-core-common</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-tool</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
