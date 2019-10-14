@@ -1,7 +1,6 @@
 package cn.dhbin.minion.core.mybatis.config;
 
 import cn.dhbin.minion.core.common.IUserInfoProvider;
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
@@ -16,11 +15,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class MybatisPlusConfiguration {
-
-    /**
-     * 基础枚举包名
-     */
-    private final static String BASE_ENUM_PACKAGE = "cn.dhbin.minion.core.mybatis.enums";
 
     /**
      * 分页
@@ -40,13 +34,6 @@ public class MybatisPlusConfiguration {
         return mybatisPlusProperties -> {
             // 关闭banner
             mybatisPlusProperties.getGlobalConfig().setBanner(false);
-            String typeEnumsPackage = mybatisPlusProperties.getTypeEnumsPackage();
-            // 拼接基础枚举包
-            if (StrUtil.length(typeEnumsPackage) > 0) {
-                mybatisPlusProperties.setTypeEnumsPackage(typeEnumsPackage + "," + BASE_ENUM_PACKAGE);
-            } else {
-                mybatisPlusProperties.setTypeEnumsPackage(BASE_ENUM_PACKAGE);
-            }
         };
     }
 
@@ -56,4 +43,9 @@ public class MybatisPlusConfiguration {
         return new DefaultMetaObjectHandler(userInfoProvider);
     }
 
+    @Bean
+    @ConditionalOnMissingBean(IUserInfoProvider.class)
+    public IUserInfoProvider userInfoProvider() {
+        return () -> 1L;
+    }
 }
