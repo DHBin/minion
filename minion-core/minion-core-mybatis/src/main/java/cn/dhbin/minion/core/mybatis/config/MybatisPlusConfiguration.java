@@ -37,15 +37,18 @@ public class MybatisPlusConfiguration {
         };
     }
 
-    @Bean
-    @ConditionalOnBean(IUserInfoProvider.class)
-    public MetaObjectHandler metaObjectHandler(IUserInfoProvider userInfoProvider) {
-        return new DefaultMetaObjectHandler(userInfoProvider);
-    }
 
     @Bean
     @ConditionalOnMissingBean(IUserInfoProvider.class)
     public IUserInfoProvider userInfoProvider() {
         return () -> 1L;
     }
+
+
+    @Bean
+    @ConditionalOnBean(IUserInfoProvider.class)
+    public MetaObjectHandler metaObjectHandler(IUserInfoProvider userInfoProvider) {
+        return new DefaultMetaObjectHandler(userInfoProvider);
+    }
+    
 }

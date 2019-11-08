@@ -4,7 +4,6 @@ import cn.dhbin.minion.core.restful.exception.FrameworkException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -153,23 +152,6 @@ public class JacksonUtils {
             t = getObjectMapper().readValue(json, clazz);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        return t;
-    }
-
-    /**
-     * Json转换为对象 转换失败返回null
-     *
-     * @param json         json字符串
-     * @param valueTypeRef valueTypeRef
-     * @param <T>          转换的对象类型
-     * @return 对象
-     */
-    public static <T> T readValue(String json, TypeReference valueTypeRef) {
-        T t = null;
-        try {
-            t = getObjectMapper().readValue(json, valueTypeRef);
-        } catch (Exception ignored) {
         }
         return t;
     }
