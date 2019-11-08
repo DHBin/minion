@@ -142,8 +142,20 @@ public class ApiResponse<T> implements Serializable {
      * @return 响应模型
      */
     public static ApiResponse fail(IErrorCode errorCode, Exception e) {
+        return fail(errorCode, e, null);
+    }
+
+    /**
+     * 失败
+     *
+     * @param errorCode 错误代码
+     * @param e         异常
+     * @param msg       msg
+     * @return 响应模型
+     */
+    public static ApiResponse fail(IErrorCode errorCode, Exception e, String msg) {
         FailResponse.FailResponseBuilder responseBuilder = FailResponse.builder()
-                .msg(errorCode.getMsg())
+                .msg(msg == null ? errorCode.getMsg() : msg)
                 .status(errorCode.getStatus())
                 .time(LocalDateTime.now())
                 .show(errorCode.isShow());

@@ -13,6 +13,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -33,6 +34,7 @@ import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
+import java.util.List;
 
 /**
  * @author donghaibin
@@ -310,7 +312,8 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
      */
     protected void handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request,
                                                          HttpServletResponse response) {
-        ResponseUtils.sendFail(request, response, ErrorCodeEnum.BAD_REQUEST, ex);
+        List<ObjectError> allErrors = ex.getBindingResult().getAllErrors();
+        ResponseUtils.sendFail(request, response, ErrorCodeEnum.BAD_REQUEST, ex, allErrors.get(0).getDefaultMessage());
     }
 
     /**

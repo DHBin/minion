@@ -1,6 +1,5 @@
 package cn.dhbin.minion.core.restful.util;
 
-import cn.dhbin.minion.core.restful.enums.ErrorCodeEnum;
 import cn.dhbin.minion.core.restful.response.ApiResponse;
 import cn.dhbin.minion.core.restful.response.FailResponse;
 import cn.dhbin.minion.core.restful.response.IErrorCode;
@@ -99,6 +98,10 @@ public class ResponseUtils {
 
     public static void sendFail(HttpServletRequest request, HttpServletResponse response, IErrorCode code, Exception ex) {
         ResponseUtils.writeValAsJson(request, getWrapper(response, code), ApiResponse.fail(code, ex));
+    }
+
+    public static void sendFail(HttpServletRequest request, HttpServletResponse response, IErrorCode code, Exception ex, String msg) {
+        ResponseUtils.writeValAsJson(request, getWrapper(response, code), ApiResponse.fail(code, ex, msg));
     }
 
     /**
