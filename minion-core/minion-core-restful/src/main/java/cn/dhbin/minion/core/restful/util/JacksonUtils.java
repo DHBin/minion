@@ -2,8 +2,8 @@ package cn.dhbin.minion.core.restful.util;
 
 import cn.dhbin.minion.core.restful.exception.FrameworkException;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -80,7 +80,7 @@ public class JacksonUtils {
                 .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .featuresToDisable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
                 .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .featuresToEnable(JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER)
+                .featuresToEnable(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature())
                 .featuresToEnable(MapperFeature.PROPAGATE_TRANSIENT_MARKER)
                 .serializationInclusion(JsonInclude.Include.NON_NULL)
                 .createXmlMapper(false)

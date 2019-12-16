@@ -23,17 +23,17 @@ public class DefaultMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         final Long uid = userInfo.getUid();
-        setInsertFieldValByName(CREATE_TIME, LocalDateTime.now(), metaObject);
-        setInsertFieldValByName(CREATE_UID, uid, metaObject);
-        setInsertFieldValByName(UPDATE_TIME, LocalDateTime.now(), metaObject);
-        setInsertFieldValByName(UPDATE_UID, uid, metaObject);
+        strictInsertFill(metaObject, CREATE_TIME, LocalDateTime.class, LocalDateTime.now());
+        strictInsertFill(metaObject, CREATE_UID, Long.class, uid);
+        strictInsertFill(metaObject, UPDATE_TIME, LocalDateTime.class, LocalDateTime.now());
+        strictInsertFill(metaObject, UPDATE_UID, Long.class, uid);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         final Long uid = userInfo.getUid();
-        setUpdateFieldValByName(UPDATE_TIME, LocalDateTime.now(), metaObject);
-        setUpdateFieldValByName(UPDATE_UID, uid, metaObject);
+        strictUpdateFill(metaObject, UPDATE_TIME, LocalDateTime.class, LocalDateTime.now());
+        strictUpdateFill(metaObject, UPDATE_UID, LocalDateTime.class, uid);
     }
 
 }

@@ -8,18 +8,18 @@
     <description>Minion快速开发框架</description>
     <groupId>cn.dhbin</groupId>
     <artifactId>minion</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
-        <spring-boot.version>2.2.0.RELEASE</spring-boot.version>
-        <spring-cloud-alibaba.version>0.9.0.RELEASE</spring-cloud-alibaba.version>
-        <modelmapper.version>2.3.0</modelmapper.version>
-        <hutool.version>4.6.10</hutool.version>
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+        <spring-cloud-alibaba.version>2.1.1.RELEASE</spring-cloud-alibaba.version>
+        <modelmapper.version>2.3.5</modelmapper.version>
+        <hutool.version>5.0.7</hutool.version>
+        <mybatis-plus.version>3.3.0</mybatis-plus.version>
     </properties>
 
     <modules>
@@ -63,7 +63,7 @@
             </dependency>
             <!--spring cloud alibaba-->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
+                <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
