@@ -8,7 +8,7 @@
     <description>Minion快速开发框架</description>
     <groupId>cn.dhbin</groupId>
     <artifactId>minion</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -20,6 +20,7 @@
         <modelmapper.version>2.3.5</modelmapper.version>
         <hutool.version>5.0.7</hutool.version>
         <mybatis-plus.version>3.3.0</mybatis-plus.version>
+        <knife4j.version>2.0.1</knife4j.version>
     </properties>
 
     <modules>
@@ -100,6 +101,17 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-annotation</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!--knife4j-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>minion</artifactId>
         <groupId>cn.dhbin</groupId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.4-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
@@ -18,6 +18,7 @@
         <module>minion-core-generate</module>
         <module>minion-core-common</module>
         <module>minion-core-bom</module>
+        <module>minion-core-swagger</module>
     </modules>
     <artifactId>minion-core</artifactId>
 

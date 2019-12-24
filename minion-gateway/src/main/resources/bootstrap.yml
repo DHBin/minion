@@ -5,6 +5,10 @@ spring:
   application:
     name: @artifactId@
   cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
     nacos:
       discovery:
         server-addr: ${NACOS-HOST:minion-register}:${NACOS-PORT:8848}
