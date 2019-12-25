@@ -1,7 +1,7 @@
 module.exports = {
   lang: 'zh-CN',
   title: 'Minion',
-  description: 'Minion 快速开发手脚架',
+  description: 'Minion 快速开发脚手架',
   base: '/minion/',
   plugins: ['vuepress-plugin-smooth-scroll', '@vuepress/active-header-links'],
   themeConfig: {
