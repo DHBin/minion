@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.dhbin.minion.core.swagger.config.SwaggerAutoConfiguration
