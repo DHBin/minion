@@ -5,9 +5,23 @@ module.exports = {
   base: '/minion/',
   plugins: ['vuepress-plugin-smooth-scroll', '@vuepress/active-header-links'],
   themeConfig: {
-    nav: require('./nav/zh')
+    sidebarDepth: 4,
+    nav: require('./nav/zh'),
+    sidebar: {
+      '/guide/': getGuideSidebar()
+    }
   },
   head: [
     ['link', { rel: 'icon', href: `/logo.png` }]
+  ]
+}
+
+function getGuideSidebar() {
+  return [
+    {
+      title: '开始',
+      collapsable: false,
+      children: ["", "dependencies", "structure", "minion-core-restful"]
+    }
   ]
 }
