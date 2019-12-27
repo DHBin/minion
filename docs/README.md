@@ -2,7 +2,7 @@
 home: true
 heroImage: /hero.png
 actionText: Get Started →
-actionLink: '/'
+actionLink: '/guide/'
 footer: Copyright © 2019 minion.dhbin.cn
 features:
   - title: 微服务
