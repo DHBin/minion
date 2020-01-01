@@ -27,10 +27,17 @@
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-restful</artifactId>
         </dependency>
+        <!--文档-->
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-swagger</artifactId>
         </dependency>
+        <!--日志-->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-log</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>

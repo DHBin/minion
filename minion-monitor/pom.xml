@@ -28,5 +28,10 @@
             <artifactId>spring-boot-admin-starter-server</artifactId>
             <version>${spring-boot-admin.version}</version>
         </dependency>
+        <!--日志-->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-log</artifactId>
+        </dependency>
     </dependencies>
 </project>
