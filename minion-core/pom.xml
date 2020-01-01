@@ -19,6 +19,7 @@
         <module>minion-core-common</module>
         <module>minion-core-bom</module>
         <module>minion-core-swagger</module>
+        <module>minion-core-log</module>
     </modules>
     <artifactId>minion-core</artifactId>
 

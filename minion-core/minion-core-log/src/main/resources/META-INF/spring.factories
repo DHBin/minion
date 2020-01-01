@@ -1,0 +1,2 @@
+org.springframework.context.ApplicationContextInitializer=\
+   cn.dhbin.minion.core.log.ApplicationLoggerInitializer
