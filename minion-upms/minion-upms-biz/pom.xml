@@ -37,12 +37,23 @@
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-log</artifactId>
         </dependency>
+        <!--日志模块-->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-security</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>${spring-boot-admin.version}</version>
         </dependency>
+
+        <!--dubbo-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-alibaba-dubbo</artifactId>-->
+        <!--        </dependency>-->
     </dependencies>
 
     <build>
