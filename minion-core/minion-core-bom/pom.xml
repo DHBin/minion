@@ -55,6 +55,11 @@
                 <artifactId>minion-core-log</artifactId>
                 <version>${minion.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.dhbin</groupId>
+                <artifactId>minion-core-security</artifactId>
+                <version>${minion.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

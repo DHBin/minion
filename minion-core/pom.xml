@@ -20,6 +20,7 @@
         <module>minion-core-bom</module>
         <module>minion-core-swagger</module>
         <module>minion-core-log</module>
+        <module>minion-core-security</module>
     </modules>
     <artifactId>minion-core</artifactId>
 
