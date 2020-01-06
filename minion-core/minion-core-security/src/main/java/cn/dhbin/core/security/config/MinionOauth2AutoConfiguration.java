@@ -8,6 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +20,9 @@ import org.springframework.web.client.RestTemplate;
  */
 @ConfigurationPropertiesScan
 @ComponentScan("cn.dhbin.core.security")
+@EnableResourceServer
+@EnableOAuth2Client
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MinionOauth2AutoConfiguration {
 
 

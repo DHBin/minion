@@ -1,6 +1,9 @@
 package cn.dhbin.minion.auth.component;
 
+import cn.dhbin.minion.umps.dto.UserInfo;
+import cn.dhbin.minion.umps.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,11 +20,17 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MinionUserDetailsServiceImpl implements UserDetailsService {
 
+    @Reference(version = "1.0.0")
+    private SysUserService sysUserService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // todo 替换成upms加载
-        log.info("加载用户: [{}]", username);
-        return User.builder().username("user").password("{noop}user").authorities("*").build();
+        UserInfo userInfo = sysUserService.getByUsername(username);
+        if (userInfo == null) {
+            return null;
+        }
+        log.info(userInfo.toString());
+        return User.withUsername(username).password(userInfo.getPassword()).authorities(userInfo.getAuthorities()).build();
     }
 
 }

@@ -2,6 +2,7 @@ package cn.dhbin.minion.upms.controller;
 
 import cn.dhbin.minion.core.restful.controller.RestfulController;
 import cn.dhbin.minion.core.restful.response.ApiResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController extends RestfulController {
 
     @GetMapping("getByName")
+    @PreAuthorize("hasAuthority('user::getByName')")
     public ApiResponse<String> getByName(String username) {
         return success(username);
     }

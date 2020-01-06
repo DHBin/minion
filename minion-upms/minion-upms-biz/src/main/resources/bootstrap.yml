@@ -14,3 +14,13 @@ spring:
         shared-dataids: minion-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   profiles:
     active: dev
+dubbo:
+  scan:
+    base-packages: cn.dhbin.minion.upms.service.impl
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://minion-register:8848
+  cloud:
+    subscribed-services: @artifactId@
