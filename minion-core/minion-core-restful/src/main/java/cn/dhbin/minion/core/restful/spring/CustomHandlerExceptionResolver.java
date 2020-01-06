@@ -11,6 +11,7 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -53,7 +54,6 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
                                               Exception ex) {
         try {
@@ -92,8 +92,11 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
                 handleAsyncRequestTimeoutException((AsyncRequestTimeoutException) ex, request, response);
             } else if (ex instanceof ConstraintViolationException) {
                 handleConstraintViolationException((ConstraintViolationException) ex, request, response);
+            } else if (ex instanceof AccessDeniedException) {
+                handleAccessDeniedException((AccessDeniedException) ex, request, response);
             } else {
                 handleException(ex, request, response);
+                log.error("error: doResolveException [{}]", ex.getMessage(), ex);
             }
         } catch (Exception handlerException) {
             if (log.isWarnEnabled()) {
@@ -101,12 +104,14 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
             }
         }
         if (ex instanceof ApiException) {
-            IErrorCode errorCode = ((ApiException) ex).getErrorCode();
+            IErrorCode<?> errorCode = ((ApiException) ex).getErrorCode();
             log.info("Info: doResolveException [{}]", errorCode.getMsg());
-        } else {
-            log.error("Error: doResolveException ", ex);
         }
         return MODEL_VIEW_INSTANCE;
+    }
+
+    private void handleAccessDeniedException(AccessDeniedException ex, HttpServletRequest request, HttpServletResponse response) {
+        ResponseUtils.sendFail(request, response, ErrorCodeEnum.UNAUTHORIZED, ex);
     }
 
     /**
