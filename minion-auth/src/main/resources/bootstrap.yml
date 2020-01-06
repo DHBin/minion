@@ -14,8 +14,3 @@ spring:
         shared-dataids: minion-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   profiles:
     active: dev
-dubbo:
-  registry:
-    address: nacos://minion-register:8848
-  cloud:
-    subscribed-services: @artifactId@
