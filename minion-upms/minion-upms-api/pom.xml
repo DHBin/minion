@@ -13,4 +13,12 @@
     <description>用户管理系统对外接口</description>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-common</artifactId>
+            <version>1.0.4-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>

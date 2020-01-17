@@ -1,21 +1,21 @@
 package cn.dhbin.minion.umps.entity;
 
+import cn.dhbin.minion.core.common.entity.BaseEntity;
 import lombok.Data;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author donghaibin
  */
 @Data
-public class SysUser implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class SysUser extends BaseEntity {
 
     private static final long serialVersionUID = 6017646420864032631L;
     /**
      * 主键id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 用户名
@@ -36,20 +36,5 @@ public class SysUser implements Serializable {
      * 邮箱
      */
     private String email;
-
-    /**
-     * 角色id
-     */
-    private Integer roleId;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 
 }
