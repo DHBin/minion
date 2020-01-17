@@ -1,7 +1,7 @@
 package cn.dhbin.minion.core.restful.util;
 
+import cn.dhbin.minion.core.common.response.IErrorCode;
 import cn.dhbin.minion.core.restful.exception.ApiException;
-import cn.dhbin.minion.core.restful.response.IErrorCode;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 

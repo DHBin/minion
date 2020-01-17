@@ -1,6 +1,4 @@
-package cn.dhbin.minion.core.restful.response;
-
-import cn.dhbin.minion.core.restful.spring.ApplicationUtils;
+package cn.dhbin.minion.core.common.response;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -125,12 +123,11 @@ public class ApiResponse<T> implements Serializable {
      * @param errorCode 错误代码
      * @return 响应模型
      */
-    public static ApiResponse fail(IErrorCode errorCode) {
+    public static ApiResponse<?> fail(IErrorCode<?> errorCode) {
         return FailResponse.builder()
                 .msg(errorCode.getMsg())
                 .status(errorCode.getStatus())
                 .time(LocalDateTime.now())
-                .show(errorCode.isShow())
                 .build();
     }
 
@@ -141,25 +138,37 @@ public class ApiResponse<T> implements Serializable {
      * @param e         异常
      * @return 响应模型
      */
-    public static ApiResponse fail(IErrorCode errorCode, Exception e) {
+    public static ApiResponse<?> fail(IErrorCode<?> errorCode, Exception e) {
         return fail(errorCode, e, null);
     }
 
     /**
-     * 失败
+     * 失败,默认不显示错误信息
      *
      * @param errorCode 错误代码
      * @param e         异常
      * @param msg       msg
      * @return 响应模型
      */
-    public static ApiResponse fail(IErrorCode errorCode, Exception e, String msg) {
-        FailResponse.FailResponseBuilder responseBuilder = FailResponse.builder()
+    public static ApiResponse<?> fail(IErrorCode<?> errorCode, Exception e, String msg) {
+        return fail(errorCode, e, msg, false);
+    }
+
+    /**
+     * 失败
+     *
+     * @param errorCode        错误代码
+     * @param e                异常
+     * @param msg              msg
+     * @param showErrorMessage 显示错误信息
+     * @return 响应模型
+     */
+    public static ApiResponse<?> fail(IErrorCode<?> errorCode, Exception e, String msg, boolean showErrorMessage) {
+        FailResponse.FailResponseBuilder<?> responseBuilder = FailResponse.builder()
                 .msg(msg == null ? errorCode.getMsg() : msg)
                 .status(errorCode.getStatus())
-                .time(LocalDateTime.now())
-                .show(errorCode.isShow());
-        if (e != null && ApplicationUtils.isDev()) {
+                .time(LocalDateTime.now());
+        if (e != null && showErrorMessage) {
             responseBuilder.exception(e.getMessage());
         }
         return responseBuilder.build();

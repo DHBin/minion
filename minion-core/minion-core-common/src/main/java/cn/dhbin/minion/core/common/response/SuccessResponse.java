@@ -1,4 +1,4 @@
-package cn.dhbin.minion.core.restful.response;
+package cn.dhbin.minion.core.common.response;
 
 import lombok.*;
 

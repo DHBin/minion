@@ -1,8 +1,7 @@
 package cn.dhbin.minion.core.restful.exception;
 
-import cn.dhbin.minion.core.restful.response.IErrorCode;
+import cn.dhbin.minion.core.common.response.IErrorCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * @author donghaibin

@@ -1,8 +1,9 @@
 package cn.dhbin.minion.core.restful.util;
 
-import cn.dhbin.minion.core.restful.response.ApiResponse;
-import cn.dhbin.minion.core.restful.response.FailResponse;
-import cn.dhbin.minion.core.restful.response.IErrorCode;
+import cn.dhbin.minion.core.common.response.ApiResponse;
+import cn.dhbin.minion.core.common.response.FailResponse;
+import cn.dhbin.minion.core.common.response.IErrorCode;
+import cn.dhbin.minion.core.restful.spring.ApplicationUtils;
 import cn.dhbin.minion.core.restful.wrapper.ResponseWrapper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -92,16 +93,16 @@ public class ResponseUtils {
      * @param response 响应
      * @param code     错误代码
      */
-    public static void sendFail(HttpServletRequest request, HttpServletResponse response, IErrorCode code) {
+    public static void sendFail(HttpServletRequest request, HttpServletResponse response, IErrorCode<?> code) {
         sendFail(request, getWrapper(response, code), code, null);
     }
 
-    public static void sendFail(HttpServletRequest request, HttpServletResponse response, IErrorCode code, Exception ex) {
+    public static void sendFail(HttpServletRequest request, HttpServletResponse response, IErrorCode<?> code, Exception ex) {
         ResponseUtils.writeValAsJson(request, getWrapper(response, code), ApiResponse.fail(code, ex));
     }
 
-    public static void sendFail(HttpServletRequest request, HttpServletResponse response, IErrorCode code, Exception ex, String msg) {
-        ResponseUtils.writeValAsJson(request, getWrapper(response, code), ApiResponse.fail(code, ex, msg));
+    public static void sendFail(HttpServletRequest request, HttpServletResponse response, IErrorCode<?> code, Exception ex, String msg) {
+        ResponseUtils.writeValAsJson(request, getWrapper(response, code), ApiResponse.fail(code, ex, msg, ApplicationUtils.isDev()));
     }
 
     /**
@@ -109,7 +110,7 @@ public class ResponseUtils {
      *
      * @return wrapper
      */
-    public static ResponseWrapper getWrapper(HttpServletResponse response, IErrorCode errorCode) {
+    public static ResponseWrapper getWrapper(HttpServletResponse response, IErrorCode<?> errorCode) {
         return new ResponseWrapper(response, errorCode);
     }
 }

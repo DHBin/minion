@@ -1,13 +1,11 @@
 package cn.dhbin.minion.core.restful.wrapper;
 
-import cn.dhbin.minion.core.restful.response.ApiResponse;
-import cn.dhbin.minion.core.restful.response.IErrorCode;
+import cn.dhbin.minion.core.common.response.ApiResponse;
+import cn.dhbin.minion.core.common.response.IErrorCode;
 import cn.dhbin.minion.core.restful.util.JacksonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.MimeTypeUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package cn.dhbin.minion.core.restful.controller;
 
-import cn.dhbin.minion.core.restful.response.ApiResponse;
-import cn.dhbin.minion.core.restful.response.SuccessResponse;
+import cn.dhbin.minion.core.common.response.ApiResponse;
+import cn.dhbin.minion.core.common.response.SuccessResponse;
 
 /**
  * Restful Controller

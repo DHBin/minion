@@ -1,7 +1,7 @@
 package cn.dhbin.minion.core.restful.enums;
 
-import cn.dhbin.minion.core.restful.response.FailResponse;
-import cn.dhbin.minion.core.restful.response.IErrorCode;
+import cn.dhbin.minion.core.common.response.FailResponse;
+import cn.dhbin.minion.core.common.response.IErrorCode;
 import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletResponse;

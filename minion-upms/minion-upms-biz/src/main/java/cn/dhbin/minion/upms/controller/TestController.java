@@ -1,7 +1,7 @@
 package cn.dhbin.minion.upms.controller;
 
+import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
-import cn.dhbin.minion.core.restful.response.ApiResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
