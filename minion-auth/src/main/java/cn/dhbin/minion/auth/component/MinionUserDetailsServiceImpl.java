@@ -29,7 +29,9 @@ public class MinionUserDetailsServiceImpl implements UserDetailsService {
         if (userInfo == null) {
             return null;
         }
-        log.info(userInfo.toString());
+        if (log.isDebugEnabled()) {
+            log.debug(userInfo.toString());
+        }
         return User.withUsername(username).password(userInfo.getPassword()).authorities(userInfo.getAuthorities()).build();
     }
 
