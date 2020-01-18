@@ -21,7 +21,7 @@ function getGuideSidebar() {
     {
       title: '开始',
       collapsable: false,
-      children: ["", "dependencies", "structure", "minion-core-restful"]
+      children: ["", "dependencies", "structure", "config", "minion-core-restful"]
     }
   ]
 }
