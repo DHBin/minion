@@ -12,10 +12,10 @@
     <packaging>pom</packaging>
 
     <artifactId>minion-core-bom</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <properties>
-        <minion.version>1.0.4-SNAPSHOT</minion.version>
+        <minion.version>1.0.5-SNAPSHOT</minion.version>
     </properties>
 
     <dependencyManagement>
