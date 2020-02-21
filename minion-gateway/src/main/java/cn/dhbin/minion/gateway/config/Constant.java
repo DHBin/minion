@@ -9,10 +9,9 @@ package cn.dhbin.minion.gateway.config;
 public interface Constant {
 
     /**
-     * 授权url，路由到minion-auth模块，如果修改该模块路由前缀，这里也要
-     * 同步修改
+     * 授权url
      */
-    String OAUTH_URL = "/auth/oauth/token";
+    String OAUTH_URL = "/oauth/token";
 
     /**
      * 获取图形验证码url
