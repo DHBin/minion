@@ -11,7 +11,7 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.lang.NonNull;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -54,8 +54,8 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
     }
 
     @Override
-    protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
-                                              Exception ex) {
+    protected ModelAndView doResolveException(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, Object handler,
+                                              @NonNull Exception ex) {
         try {
 
             if (ex instanceof ApiException) {
@@ -92,8 +92,6 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
                 handleAsyncRequestTimeoutException((AsyncRequestTimeoutException) ex, request, response);
             } else if (ex instanceof ConstraintViolationException) {
                 handleConstraintViolationException((ConstraintViolationException) ex, request, response);
-            } else if (ex instanceof AccessDeniedException) {
-                handleAccessDeniedException((AccessDeniedException) ex, request, response);
             } else {
                 handleException(ex, request, response);
                 log.error("error: doResolveException [{}]", ex.getMessage(), ex);
@@ -108,10 +106,6 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
             log.info("Info: doResolveException [{}]", errorCode.getMsg());
         }
         return MODEL_VIEW_INSTANCE;
-    }
-
-    private void handleAccessDeniedException(AccessDeniedException ex, HttpServletRequest request, HttpServletResponse response) {
-        ResponseUtils.sendFail(request, response, ErrorCodeEnum.UNAUTHORIZED, ex);
     }
 
     /**
