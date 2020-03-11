@@ -167,4 +167,26 @@
         </plugins>
     </build>
 
+    <profiles>
+        <!--    开发环境    -->
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <project.active>dev</project.active>
+                <nacos.namespace>minion-dev</nacos.namespace>
+            </properties>
+        </profile>
+        <!--    生产环境    -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <project.active>prod</project.active>
+                <nacos.namespace>minion-prod</nacos.namespace>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>
