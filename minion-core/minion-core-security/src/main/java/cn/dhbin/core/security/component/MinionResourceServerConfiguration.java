@@ -25,6 +25,11 @@ public class MinionResourceServerConfiguration extends ResourceServerConfigurerA
      */
     private static final String SWAGGER_DOC_PATH = "/v2/api-docs";
 
+    /**
+     * 监控接口
+     */
+    private static final String ACTUATOR_PATH = "/actuator/**";
+
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         remoteTokenServices.setRestTemplate(restTemplate);
@@ -35,6 +40,7 @@ public class MinionResourceServerConfiguration extends ResourceServerConfigurerA
         http
                 .authorizeRequests()
                 .antMatchers(SWAGGER_DOC_PATH).permitAll()
+                .antMatchers(ACTUATOR_PATH).permitAll()
                 .anyRequest().authenticated();
     }
 }

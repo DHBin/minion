@@ -18,6 +18,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
+    /**
+     * 排除swagger文档路径
+     */
+    private static final String SWAGGER_DOC_PATH = "/v2/api-docs";
+
+    /**
+     * 监控接口
+     */
+    private static final String ACTUATOR_PATH = "/actuator/**";
+
     @Override
     protected UserDetailsService userDetailsService() {
         return userDetailsService;
@@ -25,6 +35,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http
+                .authorizeRequests()
+                .antMatchers(SWAGGER_DOC_PATH).permitAll()
+                .antMatchers(ACTUATOR_PATH).permitAll()
+                .anyRequest().authenticated();
     }
 }
