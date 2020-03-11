@@ -37,7 +37,7 @@
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-log</artifactId>
         </dependency>
-        <!--日志模块-->
+        <!--鉴权模块-->
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-security</artifactId>

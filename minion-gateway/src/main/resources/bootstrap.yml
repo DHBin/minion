@@ -11,11 +11,13 @@ spring:
           lower-case-service-id: true
     nacos:
       discovery:
+        namespace: @nacos.namespace@
         server-addr: ${NACOS-HOST:minion-register}:${NACOS-PORT:8848}
       config:
+        namespace: @nacos.namespace@
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
         shared-configs:
           - minion-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   profiles:
-    active: dev
+    active: @project.active@
