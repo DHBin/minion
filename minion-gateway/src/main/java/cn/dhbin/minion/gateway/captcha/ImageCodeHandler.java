@@ -4,7 +4,7 @@ import com.wf.captcha.ArithmeticCaptcha;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -18,6 +18,9 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 import java.util.Optional;
 
+import static cn.dhbin.minion.gateway.config.Constant.CAPTCHA_PARAM_NAME;
+import static cn.dhbin.minion.gateway.config.Constant.CODE_KEY_PREFIX;
+
 /**
  * 验证码处理逻辑
  *
@@ -27,10 +30,9 @@ import java.util.Optional;
 @AllArgsConstructor
 @Component
 @Slf4j
-@SuppressWarnings("unchecked,rawtypes")
 public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
 
-    private final RedisTemplate redisTemplate;
+    private final StringRedisTemplate redisTemplate;
 
     /**
      * 验证码宽度
@@ -46,16 +48,6 @@ public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
      * 验证码有效期60秒
      */
     private static final long CAPTCHA_TIMEOUT_TIME = 60;
-
-    /**
-     * 验证码随机数参数
-     */
-    private static final String CAPTCHA_PARAM_NAME = "rand";
-
-    /**
-     * 验证码缓存key前缀
-     */
-    private static final String CODE_KEY_PREFIX = "code_key::";
 
 
     @Override

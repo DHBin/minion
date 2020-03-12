@@ -1,5 +1,6 @@
 package cn.dhbin.minion.auth.component;
 
+import cn.dhbin.minion.auth.api.Version;
 import cn.dhbin.minion.umps.dto.UserInfo;
 import cn.dhbin.minion.umps.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MinionUserDetailsServiceImpl implements UserDetailsService {
 
-    @Reference(version = "1.0.0")
+    @Reference(version = Version.V_1_0_0)
     private SysUserService sysUserService;
 
     @Override

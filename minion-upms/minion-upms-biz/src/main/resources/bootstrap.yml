@@ -17,3 +17,6 @@ spring:
           - minion-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   profiles:
     active: @project.active@
+dubbo:
+  application:
+    name: @artifactId@

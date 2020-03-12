@@ -16,6 +16,8 @@ public class InMemoryUserServiceImpl implements SysUserService {
         UserInfo userInfo = new UserInfo();
         userInfo.setUsername("user");
         userInfo.setPassword("{noop}password");
+        userInfo.setRoles(new String[]{"admin"});
+        userInfo.setAuthorities(new String[]{"admin"});
         userInfo.setAuthorities(new String[]{"user::getByName"});
         return userInfo;
     }

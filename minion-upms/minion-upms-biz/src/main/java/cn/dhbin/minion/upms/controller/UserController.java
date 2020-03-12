@@ -1,11 +1,20 @@
 package cn.dhbin.minion.upms.controller;
 
+import cn.dhbin.core.security.util.SecurityUtil;
+import cn.dhbin.minion.auth.api.TokenService;
+import cn.dhbin.minion.auth.api.Version;
 import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
-import org.springframework.security.access.prepost.PreAuthorize;
+import cn.dhbin.minion.umps.dto.UserInfo;
+import cn.dhbin.minion.umps.service.SysUserService;
+import lombok.RequiredArgsConstructor;
+import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Objects;
 
 /**
  * @author donghaibin
@@ -13,12 +22,26 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("user")
+@RequiredArgsConstructor
 public class UserController extends RestfulController {
 
-    @GetMapping("getByName")
-    @PreAuthorize("hasAuthority('user::getByName')")
-    public ApiResponse<String> getByName(String username) {
-        return success(username);
+    private final SysUserService sysUserService;
+
+    @Reference(version = Version.V_1_0_0, check = false)
+    private TokenService tokenService;
+
+    @GetMapping("getUserInfo")
+    public ApiResponse<UserInfo> getUserInfo() {
+        String username = SecurityUtil.getUsername();
+        return success(sysUserService.getByUsername(username));
+    }
+
+    @GetMapping("/logout")
+    public ApiResponse<?> logout() {
+        OAuth2Authentication oAuth2Authentication = Objects.requireNonNull(SecurityUtil.getOAuth2Authentication());
+        String clientId = oAuth2Authentication.getOAuth2Request().getClientId();
+        String name = oAuth2Authentication.getUserAuthentication().getName();
+        return success(tokenService.removeToken(clientId, name));
     }
 
 }

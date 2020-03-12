@@ -13,7 +13,12 @@ public enum ErrorCode implements IErrorCode<Object> {
     /**
      * 验证码为空
      */
-    CODE_IS_BLACK(101_001_01, "验证码为空");
+    CODE_IS_BLACK(101_001_01, "验证码为空"),
+
+    /**
+     * 验证码错误
+     */
+    CODE_ILLEGAL(101_001_02, "验证码错误");
 
     private final Integer status;
 

@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>minion-upms</artifactId>
+        <artifactId>minion-auth</artifactId>
         <groupId>cn.dhbin</groupId>
         <version>1.0.5-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>minion-upms-biz</artifactId>
+    <packaging>jar</packaging>
+    <artifactId>minion-auth-biz</artifactId>
 
     <dependencies>
         <!--注册中心客户端-->
@@ -22,38 +22,30 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-
-        <!--redis-->
+        <!--安全模块 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+        <!--web 模块-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--JDBC 模块-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!--Redis 模块-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-
-        <!--Web模块-->
+        <!--mysql-->
         <dependency>
-            <groupId>cn.dhbin</groupId>
-            <artifactId>minion-core-restful</artifactId>
-        </dependency>
-        <!--文档-->
-        <dependency>
-            <groupId>cn.dhbin</groupId>
-            <artifactId>minion-core-swagger</artifactId>
-        </dependency>
-        <!--日志-->
-        <dependency>
-            <groupId>cn.dhbin</groupId>
-            <artifactId>minion-core-log</artifactId>
-        </dependency>
-        <!--鉴权模块-->
-        <dependency>
-            <groupId>cn.dhbin</groupId>
-            <artifactId>minion-core-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${spring-boot-admin.version}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
         <!--dubbo-->
@@ -61,7 +53,6 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>
         </dependency>
-
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-upms-api</artifactId>
@@ -69,19 +60,14 @@
         </dependency>
         <dependency>
             <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-common</artifactId>
+            <version>1.0.5-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
             <artifactId>minion-auth-api</artifactId>
             <version>1.0.5-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
