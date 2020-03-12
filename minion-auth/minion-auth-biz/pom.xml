@@ -5,7 +5,7 @@
     <parent>
         <artifactId>minion-auth</artifactId>
         <groupId>cn.dhbin</groupId>
-        <version>1.0.5-SNAPSHOT</version>
+        <version>1.0.6-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
@@ -56,17 +56,17 @@
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-upms-api</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
+            <version>1.0.6-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-common</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
+            <version>1.0.6-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-auth-api</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
+            <version>1.0.6-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
