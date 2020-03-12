@@ -23,10 +23,15 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public Boolean removeToken(String clientId, String username) {
-        Collection<OAuth2AccessToken> accessTokens = tokenStore.findTokensByClientIdAndUserName(clientId, username);
-        for (OAuth2AccessToken accessToken : accessTokens) {
-            tokenStore.removeAccessToken(accessToken);
-            tokenStore.removeRefreshToken(accessToken.getRefreshToken());
+        try {
+            Collection<OAuth2AccessToken> accessTokens = tokenStore.findTokensByClientIdAndUserName(clientId, username);
+            for (OAuth2AccessToken accessToken : accessTokens) {
+                tokenStore.removeAccessToken(accessToken);
+                tokenStore.removeRefreshToken(accessToken.getRefreshToken());
+            }
+        } catch (Exception e) {
+            log.error("removeToken error", e);
+            return false;
         }
         return true;
     }
