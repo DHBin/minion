@@ -16,6 +16,7 @@
 
     <properties>
         <minion.version>1.0.6-SNAPSHOT</minion.version>
+        <dubbo-dependencies-zookeeper.version>2.7.4.1</dubbo-dependencies-zookeeper.version>
     </properties>
 
     <dependencyManagement>
@@ -59,6 +60,23 @@
                 <groupId>cn.dhbin</groupId>
                 <artifactId>minion-core-security</artifactId>
                 <version>${minion.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper</artifactId>
+                <version>${dubbo-dependencies-zookeeper.version}</version>
+                <type>pom</type>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
