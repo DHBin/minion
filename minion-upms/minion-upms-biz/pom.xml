@@ -55,12 +55,6 @@
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
 
-        <!--dubbo-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-dubbo</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-upms-api</artifactId>
@@ -69,6 +63,11 @@
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-auth-api</artifactId>
+            <version>1.0.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-dubbo</artifactId>
             <version>1.0.6-SNAPSHOT</version>
         </dependency>
 

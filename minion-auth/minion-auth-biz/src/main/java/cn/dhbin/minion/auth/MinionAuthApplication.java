@@ -1,5 +1,6 @@
 package cn.dhbin.minion.auth;
 
+import cn.dhbin.minion.core.dubbo.annotation.EnableExposeWeb;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @EnableDubbo
+@EnableExposeWeb
 public class MinionAuthApplication {
 
     public static void main(String[] args) {

@@ -1,6 +1,8 @@
 package cn.dhbin.minion.upms;
 
 import cn.dhbin.core.security.annotation.EnableMinionResourceServer;
+import cn.dhbin.minion.core.dubbo.annotation.EnableExposeWeb;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @EnableMinionResourceServer
+@EnableDubbo
+@EnableExposeWeb
 public class MinionUpmsApplication {
 
     public static void main(String[] args) {

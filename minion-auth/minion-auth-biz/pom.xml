@@ -48,12 +48,6 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!--dubbo-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-dubbo</artifactId>
-        </dependency>
-
         <!--监控-->
         <dependency>
             <groupId>de.codecentric</groupId>
@@ -68,6 +62,11 @@
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-common</artifactId>
+            <version>1.0.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-dubbo</artifactId>
             <version>1.0.6-SNAPSHOT</version>
         </dependency>
         <dependency>
