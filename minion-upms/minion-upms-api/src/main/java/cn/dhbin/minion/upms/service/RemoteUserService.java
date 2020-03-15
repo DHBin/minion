@@ -1,12 +1,12 @@
-package cn.dhbin.minion.umps.service;
+package cn.dhbin.minion.upms.service;
 
-import cn.dhbin.minion.umps.dto.UserInfo;
+import cn.dhbin.minion.upms.dto.UserInfo;
 
 /**
  * @author donghaibin
  * @date 2020/1/6
  */
-public interface SysUserService {
+public interface RemoteUserService {
 
     /**
      * 根据用户名获取信息

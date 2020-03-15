@@ -5,8 +5,8 @@ import cn.dhbin.minion.auth.api.TokenService;
 import cn.dhbin.minion.auth.api.Version;
 import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
-import cn.dhbin.minion.umps.dto.UserInfo;
-import cn.dhbin.minion.umps.service.SysUserService;
+import cn.dhbin.minion.upms.dto.UserInfo;
+import cn.dhbin.minion.upms.service.RemoteUserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -25,7 +25,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserController extends RestfulController {
 
-    private final SysUserService sysUserService;
+    private final RemoteUserService remoteUserService;
 
     @Reference(version = Version.V_1_0_0, check = false)
     private TokenService tokenService;
@@ -33,7 +33,7 @@ public class UserController extends RestfulController {
     @GetMapping("getUserInfo")
     public ApiResponse<UserInfo> getUserInfo() {
         String username = SecurityUtil.getUsername();
-        return success(sysUserService.getByUsername(username));
+        return success(remoteUserService.getByUsername(username));
     }
 
     @GetMapping("/logout")

@@ -1,4 +1,4 @@
-package cn.dhbin.minion.umps;
+package cn.dhbin.minion.upms;
 
 /**
  * @author donghaibin

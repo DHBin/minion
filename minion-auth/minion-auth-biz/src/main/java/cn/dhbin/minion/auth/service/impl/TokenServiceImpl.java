@@ -1,7 +1,7 @@
 package cn.dhbin.minion.auth.service.impl;
 
 import cn.dhbin.minion.auth.api.TokenService;
-import cn.dhbin.minion.umps.Version;
+import cn.dhbin.minion.upms.Version;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;

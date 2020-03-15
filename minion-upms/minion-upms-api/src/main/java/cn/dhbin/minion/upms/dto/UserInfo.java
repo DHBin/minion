@@ -1,4 +1,4 @@
-package cn.dhbin.minion.umps.dto;
+package cn.dhbin.minion.upms.dto;
 
 import lombok.Data;
 
