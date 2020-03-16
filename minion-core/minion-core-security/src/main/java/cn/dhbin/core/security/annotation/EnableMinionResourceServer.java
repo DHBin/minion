@@ -1,6 +1,6 @@
 package cn.dhbin.core.security.annotation;
 
-import cn.dhbin.core.security.config.MinionOauth2AutoConfiguration;
+import cn.dhbin.core.security.client.MinionOauth2AutoConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 

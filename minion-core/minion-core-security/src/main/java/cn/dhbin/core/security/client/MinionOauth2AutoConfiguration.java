@@ -1,4 +1,4 @@
-package cn.dhbin.core.security.config;
+package cn.dhbin.core.security.client;
 
 import lombok.SneakyThrows;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
  * @date 2020/1/4
  */
 @ConfigurationPropertiesScan
-@ComponentScan("cn.dhbin.core.security")
+@ComponentScan("cn.dhbin.core.security.client")
 @EnableResourceServer
 @EnableOAuth2Client
 @EnableGlobalMethodSecurity(prePostEnabled = true)
