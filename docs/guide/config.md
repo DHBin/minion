@@ -1,14 +1,23 @@
 # 配置
 
+## 数据库
+
+执行db目录下的sql
+
+```
+minion_auth.sql
+minion_upms.sql
+```
+
 ## 环境配置
 
 host添加对应组件IP
 
 ```
-127.0.0.1   minion-register
-127.0.0.1   minion-mysql
-127.0.0.1   minion-redis
-127.0.0.1   minion
+127.0.0.1 minion-register
+127.0.0.1 minion-mysql
+127.0.0.1 minion-redis
+127.0.0.1 minion-zookeeper
 ```
 
 ## 服务配置
@@ -48,7 +57,7 @@ dubbo:
     base-packages: cn.dhbin.minion.auth.service.impl;
   protocol:
     name: dubbo
-    port: -1
+    port: 20880
   consumer:
     check: false
   registry:
@@ -85,6 +94,14 @@ spring:
 > minion-upms-biz-dev.yml
 
 ```yaml
+# 数据源
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: 数据库用户名
+    password: 数据库密码
+    url: jdbc:mysql://minion-mysql:3306/minion_upms?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
 swagger:
   enabled: true
   title: upms
@@ -102,7 +119,7 @@ dubbo:
     base-packages: cn.dhbin.minion.upms.service.impl
   protocol:
     name: dubbo
-    port: -1
+    port: 20881
   registry:
     address: nacos://minion-register:8848
   cloud:

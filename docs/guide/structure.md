@@ -7,6 +7,7 @@
 ├── minion-core
 │   ├── minion-core-bom
 │   ├── minion-core-common
+│   ├── minion-core-dubbo                           Dubbo             
 │   ├── minion-core-generate						代码生成器
 │   ├── minion-core-log								日志模块
 │   ├── minion-core-mybatis							封装mybatis
