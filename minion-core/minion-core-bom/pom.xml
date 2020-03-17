@@ -61,6 +61,11 @@
                 <artifactId>minion-core-security</artifactId>
                 <version>${minion.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.dhbin</groupId>
+                <artifactId>minion-core-dubbo</artifactId>
+                <version>${minion.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.dubbo</groupId>

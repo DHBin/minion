@@ -56,31 +56,36 @@
             <artifactId>minion-core-mybatis</artifactId>
         </dependency>
 
+        <!--dubbo模块-->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-dubbo</artifactId>
+        </dependency>
+
         <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--spring boot admin-->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
 
+        <!--管理平台接口-->
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-upms-api</artifactId>
-            <version>1.0.6-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
+
+        <!--鉴权平台接口-->
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-auth-api</artifactId>
-            <version>1.0.6-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.dhbin</groupId>
-            <artifactId>minion-core-dubbo</artifactId>
-            <version>1.0.6-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
