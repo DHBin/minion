@@ -1,5 +1,7 @@
 create schema minion_upms collate utf8mb4_unicode_ci;
 
+use minion_upms;
+
 create table sys_api
 (
     id             varchar(100) not null comment 'id'

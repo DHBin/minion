@@ -1,5 +1,7 @@
 create schema minion_auth collate utf8mb4_unicode_ci;
 
+use minion_auth;
+
 -- oauth2 客户端表
 create table oauth_client_details
 (
