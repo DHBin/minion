@@ -61,7 +61,7 @@ dubbo:
   consumer:
     check: false
   registry:
-    address: nacos://minion-register:8848
+    address: zookeeper://minion-zookeeper:2181
   cloud:
     subscribed-services: minion-upms-biz
 ```
@@ -121,7 +121,7 @@ dubbo:
     name: dubbo
     port: 20881
   registry:
-    address: nacos://minion-register:8848
+    address: zookeeper://minion-zookeeper:2181
   cloud:
     subscribed-services: minion-auth-biz
 ```
