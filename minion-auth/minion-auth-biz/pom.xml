@@ -54,15 +54,22 @@
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
 
-
+        <!--common-->
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-common</artifactId>
         </dependency>
 
+        <!--Dubbo-->
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-dubbo</artifactId>
+        </dependency>
+
+        <!--日志-->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-log</artifactId>
         </dependency>
 
 
