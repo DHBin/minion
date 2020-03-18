@@ -33,7 +33,7 @@ public class DefaultMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         final Long uid = userInfo.getUid();
         strictUpdateFill(metaObject, UPDATE_TIME, LocalDateTime.class, LocalDateTime.now());
-        strictUpdateFill(metaObject, UPDATE_UID, LocalDateTime.class, uid);
+        strictUpdateFill(metaObject, UPDATE_UID, Long.class, uid);
     }
 
 }

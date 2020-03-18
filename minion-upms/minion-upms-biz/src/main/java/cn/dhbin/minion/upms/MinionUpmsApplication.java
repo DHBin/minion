@@ -6,6 +6,7 @@ import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @author donghaibin
@@ -15,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableMinionResourceServer
 @EnableDubbo
 @EnableExposeWeb
+@EnableCaching
 @MapperScan("cn.dhbin.minion.upms.mapper")
 public class MinionUpmsApplication {
 

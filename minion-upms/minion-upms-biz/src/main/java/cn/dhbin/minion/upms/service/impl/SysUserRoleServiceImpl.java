@@ -6,6 +6,8 @@ import cn.dhbin.minion.upms.mapper.SysUserRoleMapper;
 import cn.dhbin.minion.upms.service.SysUserRoleService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author donghaibin
  * @date 2020/3/16
@@ -14,4 +16,8 @@ import org.springframework.stereotype.Service;
 public class SysUserRoleServiceImpl extends MinionServiceImpl<SysUserRoleMapper, SysUserRole> implements SysUserRoleService {
 
 
+    @Override
+    public List<SysUserRole> getByUserId(Long userId) {
+        return lambdaQuery().eq(SysUserRole::getUid, userId).list();
+    }
 }

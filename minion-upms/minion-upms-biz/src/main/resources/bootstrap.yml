@@ -20,3 +20,5 @@ spring:
 dubbo:
   application:
     name: @artifactId@
+mybatis-plus:
+  type-enums-package: cn.dhbin.minion.upms.model.enums

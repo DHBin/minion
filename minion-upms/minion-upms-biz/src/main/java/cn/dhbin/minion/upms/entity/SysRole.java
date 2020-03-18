@@ -31,6 +31,12 @@ public class SysRole extends BaseEntity {
     private String name;
 
     /**
+     * 角色标识
+     */
+    @TableField(value = "role_key")
+    private String roleKey;
+
+    /**
      * 说明
      */
     @TableField(value = "description")

@@ -1,6 +1,7 @@
 package cn.dhbin.minion.upms.entity;
 
 import cn.dhbin.minion.core.common.entity.BaseEntity;
+import cn.dhbin.minion.upms.model.enums.MenuType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -27,8 +28,8 @@ public class SysMenu extends BaseEntity {
     /**
      * 名称
      */
-    @TableField(value = "name")
-    private String name;
+    @TableField(value = "label")
+    private String label;
 
     /**
      * 说明
@@ -40,7 +41,7 @@ public class SysMenu extends BaseEntity {
      * 1-顶部菜单 2-左侧菜单
      */
     @TableField(value = "type")
-    private Boolean type;
+    private MenuType type;
 
     /**
      * 前端页面路径

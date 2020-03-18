@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_menu_api")
-public class SysMenuApi extends BaseEntity {
+@TableName(value = "sys_user_perm")
+public class SysUserPerm extends BaseEntity {
 
     private static final long serialVersionUID = -7876603981538297623L;
     /**
@@ -25,16 +25,16 @@ public class SysMenuApi extends BaseEntity {
     private Long id;
 
     /**
-     * 菜单id
+     * 用户id
      */
-    @TableField(value = "mid")
-    private Long mid;
+    @TableField(value = "uid")
+    private Long uid;
 
     /**
-     * Api id
+     * 权限 id
      */
-    @TableField(value = "aid")
-    private String aid;
+    @TableField(value = "pid")
+    private String pid;
 
 
 }

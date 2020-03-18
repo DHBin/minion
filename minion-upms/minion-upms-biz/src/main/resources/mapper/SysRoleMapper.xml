@@ -6,6 +6,7 @@
         <!--@Table sys_role-->
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="role_key" jdbcType="VARCHAR" property="roleKey"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
@@ -14,6 +15,6 @@
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        id, `name`, description, create_time, update_time, create_uid, update_uid
+        id, `name`, roleKey, description, create_time, update_time, create_uid, update_uid
     </sql>
 </mapper>

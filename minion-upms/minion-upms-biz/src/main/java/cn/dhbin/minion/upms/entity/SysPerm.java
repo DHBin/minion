@@ -14,14 +14,14 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_api")
-public class SysApi extends BaseEntity {
+@TableName(value = "sys_perm")
+public class SysPerm extends BaseEntity {
 
     private static final long serialVersionUID = -2255757251551166196L;
     /**
      * id
      */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.INPUT)
     private String id;
 
     /**
