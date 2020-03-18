@@ -8,4 +8,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IMinionService<T> extends IService<T> {
 
+    /**
+     * 更新
+     *
+     * @param entity entity
+     * @return 更新后的entity，如果失败返回null
+     */
+    T updateByIdAndReturn(T entity);
+
 }
