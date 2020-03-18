@@ -67,12 +67,15 @@ public class RequestMappingServiceImpl implements RequestMappingService {
                 info.setAuthorizations(String.join(StrUtil.COMMA, authorizations));
             }
 
-            // md5(method[] + path[])
-            String id = SecureUtil.md5(String.join(StrUtil.COMMA, info.getMethod()) + String.join(StrUtil.COMMA, info.getPath()));
+            // md5(own + method[] + path[])
+            String own = info.getOwn();
+            String methods = String.join(StrUtil.COMMA, info.getMethod());
+            String paths = String.join(StrUtil.COMMA, info.getPath());
+            String id = SecureUtil.md5(own + methods + paths);
             info.setId(id);
             requestMappingInfos.add(info);
         });
-        return requestMappingInfos;
+        return requestMappingInfos.stream().distinct().collect(Collectors.toList());
     }
 
 

@@ -2,6 +2,7 @@ package cn.dhbin.minion.core.dubbo.web.model;
 
 import cn.dhbin.minion.core.tool.converter.Convert;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -10,6 +11,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
+@EqualsAndHashCode
 public class RequestMappingInfo implements Convert {
 
 
