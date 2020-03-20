@@ -16,7 +16,7 @@ public class UserInfo implements Serializable {
     /**
      * 主键id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 用户名

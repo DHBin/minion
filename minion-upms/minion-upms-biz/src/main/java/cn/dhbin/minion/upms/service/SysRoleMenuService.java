@@ -19,5 +19,12 @@ public interface SysRoleMenuService extends IMinionService<SysRoleMenu> {
      */
     List<SysRoleMenu> getByRoleId(Long roleId);
 
+    /**
+     * 更新角色菜单
+     *
+     * @param roleId  角色id
+     * @param menuIds 菜单ids
+     */
+    void updateRoleMenu(Long roleId, List<Long> menuIds);
 
 }

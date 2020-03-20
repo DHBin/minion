@@ -5,12 +5,15 @@ import cn.dhbin.minion.upms.dto.UserInfo;
 import cn.dhbin.minion.upms.entity.SysPerm;
 import cn.dhbin.minion.upms.entity.SysRole;
 import cn.dhbin.minion.upms.entity.SysUser;
-import cn.dhbin.minion.upms.service.RemoteUserService;
-import cn.dhbin.minion.upms.service.SysPermService;
-import cn.dhbin.minion.upms.service.SysRoleService;
-import cn.dhbin.minion.upms.service.SysUserService;
+import cn.dhbin.minion.upms.service.*;
+import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.dubbo.config.annotation.Service;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author donghaibin
@@ -26,9 +29,13 @@ public class InMemoryUserServiceImpl implements RemoteUserService {
 
     private final SysPermService sysPermService;
 
+    private final SysRoleMenuService sysRoleMenuService;
+
+
+
     @Override
     public UserInfo getByUsername(String username) {
-        SysUser sysUser = sysUserService.getByUsername(username);
+        SysUser sysUser = this.sysUserService.getByUsername(username);
         if (sysUser == null) {
             return null;
         }
@@ -36,14 +43,28 @@ public class InMemoryUserServiceImpl implements RemoteUserService {
         userInfo.setUsername(sysUser.getUsername());
         userInfo.setPassword(sysUser.getPassword());
 
-        String[] roles = sysRoleService.getRoleByUserId(sysUser.getId())
-                .stream().map(SysRole::getRoleKey).toArray(String[]::new);
-        userInfo.setRoles(roles);
+        List<SysRole> roles = this.sysRoleService.getRoleByUserId(sysUser.getId());
+        userInfo.setRoles(roles.stream().map(SysRole::getRoleKey).distinct().toArray(String[]::new));
 
-        String[] authorities = sysPermService.getByUserId(sysUser.getId()).stream()
-                .map(SysPerm::getAuthorizations)
+        // 角色权限
+        List<SysPerm> rolePerms = roles.stream().map(sysRole -> this.sysPermService.getByRoleId(sysRole.getId()))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        // 菜单权限
+        List<SysPerm> menuPerms = roles.stream()
+                .map(sysRole -> this.sysRoleMenuService.getByRoleId(sysRole.getId()))
+                .flatMap(Collection::stream)
+                .map(sysRoleMenu -> this.sysPermService.getByMenuId(sysRoleMenu.getMid()))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        String[] authorities = Stream.of(rolePerms, menuPerms)
+                .flatMap(Collection::stream).map(SysPerm::getAuthorizations)
+                .filter(StrUtil::isNotBlank)
                 .toArray(String[]::new);
         userInfo.setAuthorities(authorities);
+        userInfo.setId(sysUser.getId());
         return userInfo;
     }
 

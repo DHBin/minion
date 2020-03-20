@@ -1,6 +1,8 @@
 package cn.dhbin.minion.upms.model.dto;
 
 import cn.dhbin.minion.core.tool.converter.Convert;
+import cn.dhbin.minion.upms.model.enums.MenuType;
+import cn.dhbin.minion.upms.util.TreeNode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,15 +14,15 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class MenuDto implements Convert {
+public class SysMenuDto extends TreeNode implements Convert {
 
     private static final long serialVersionUID = -797162840129744190L;
+
+    private Long id;
 
     private String path;
 
     private String component;
-
-    private List<MenuDto> children;
 
     private Object meta;
 
@@ -33,5 +35,9 @@ public class MenuDto implements Convert {
     private Integer parentNum;
 
     private Integer num;
+
+    private MenuType type;
+
+    private List<String> perms;
 
 }

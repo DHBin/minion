@@ -28,7 +28,7 @@ public class MinionUserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserInfo userInfo = remoteUserService.getByUsername(username);
         if (userInfo == null) {
-            return null;
+            throw new UsernameNotFoundException(username);
         }
         if (log.isDebugEnabled()) {
             log.debug(userInfo.toString());

@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_user_perm")
-public class SysUserPerm extends BaseEntity {
+@TableName(value = "sys_role_perm")
+public class SysRolePerm extends BaseEntity {
 
     private static final long serialVersionUID = -7876603981538297623L;
     /**
@@ -25,10 +25,10 @@ public class SysUserPerm extends BaseEntity {
     private Long id;
 
     /**
-     * 用户id
+     * 角色id
      */
-    @TableField(value = "uid")
-    private Long uid;
+    @TableField(value = "rid")
+    private Long rid;
 
     /**
      * 权限 id

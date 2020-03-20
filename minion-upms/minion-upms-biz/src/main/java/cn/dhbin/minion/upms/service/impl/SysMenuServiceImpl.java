@@ -1,20 +1,29 @@
 package cn.dhbin.minion.upms.service.impl;
 
 import cn.dhbin.minion.core.mybatis.service.MinionServiceImpl;
+import cn.dhbin.minion.upms.config.Constant;
 import cn.dhbin.minion.upms.entity.SysMenu;
+import cn.dhbin.minion.upms.entity.SysMenuPerm;
+import cn.dhbin.minion.upms.entity.SysRoleMenu;
 import cn.dhbin.minion.upms.entity.SysUserRole;
 import cn.dhbin.minion.upms.mapper.SysMenuMapper;
-import cn.dhbin.minion.upms.model.dto.MenuDto;
+import cn.dhbin.minion.upms.model.dto.SysMenuDto;
 import cn.dhbin.minion.upms.model.enums.MenuType;
+import cn.dhbin.minion.upms.service.SysMenuPermService;
 import cn.dhbin.minion.upms.service.SysMenuService;
 import cn.dhbin.minion.upms.service.SysRoleMenuService;
 import cn.dhbin.minion.upms.service.SysUserRoleService;
+import cn.dhbin.minion.upms.util.TreeUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -29,33 +38,94 @@ public class SysMenuServiceImpl extends MinionServiceImpl<SysMenuMapper, SysMenu
 
     private final SysRoleMenuService sysRoleMenuService;
 
-    @Override
-    public List<MenuDto> getMenuByUserId(Long userId, Integer parentId) {
-        List<SysUserRole> userRoleList = sysUserRoleService.getByUserId(userId);
+    private final SysMenuPermService sysMenuPermService;
 
-        List<SysMenu> sysMenus = userRoleList.stream()
+    @Override
+    public List<SysMenuDto> getTopMenuByUserId(Long userId) {
+        List<SysUserRole> userRoleList = sysUserRoleService.getByUserId(userId);
+        return userRoleList.stream()
                 .map(sysUserRole -> sysRoleMenuService.getByRoleId(sysUserRole.getRid()))
                 .flatMap(Collection::stream)
-                .map(sysRoleMenu -> lambdaQuery()
+                .map(sysRoleMenu -> this.lambdaQuery()
+                        .eq(SysMenu::getId, sysRoleMenu.getMid())
+                        .eq(SysMenu::getType, MenuType.TOP_MENU)
+                        .one()
+                )
+                .filter(Objects::nonNull)
+                .map(sysMenu -> sysMenu.convert(SysMenuDto.class))
+                .sorted(Comparator.comparingInt(SysMenuDto::getOrderNum))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SysMenuDto> getMenuTreeByUserId(Long userId, Integer parentId) {
+        List<SysUserRole> userRoleList = sysUserRoleService.getByUserId(userId);
+
+        List<SysMenuDto> sysMenus = userRoleList.stream()
+                .map(sysUserRole -> sysRoleMenuService.getByRoleId(sysUserRole.getRid()))
+                .flatMap(Collection::stream)
+                .map(sysRoleMenu -> this.lambdaQuery()
                         .eq(SysMenu::getId, sysRoleMenu.getMid())
                         .eq(SysMenu::getType, MenuType.MENU)
                         .one()
-                ).collect(Collectors.toList());
+                )
+                .filter(Objects::nonNull)
+                .map(sysMenu -> sysMenu.convert(SysMenuDto.class))
+                .sorted(Comparator.comparingInt(SysMenuDto::getOrderNum))
+                .collect(Collectors.toList());
 
-        List<MenuDto> menuDtos = new ArrayList<>(sysMenus.size());
-        for (SysMenu sysMenu : sysMenus) {
-            if (!sysMenu.getParentNum().equals(parentId)) {
-                continue;
-            }
-            MenuDto menuDto = sysMenu.convert(MenuDto.class);
-            List<SysMenu> subMenuDto = sysMenus.stream()
-                    .filter(m -> m.getParentNum().equals(menuDto.getNum()))
-                    .collect(Collectors.toList());
-            sysMenus.removeAll(subMenuDto);
-            menuDto.setChildren(subMenuDto.stream().map(m -> m.convert(MenuDto.class)).collect(Collectors.toList()));
-            menuDtos.add(menuDto);
-        }
-        return menuDtos;
+        return TreeUtil.buildByLoop(sysMenus, parentId == null ? Constant.ROOT_MENU : parentId);
     }
 
+    @Override
+    public List<SysMenuDto> getByRoleId(Long roleId) {
+        List<SysMenuDto> dtos = sysRoleMenuService.getByRoleId(roleId)
+                .stream()
+                .map(sysRoleMenu -> this.lambdaQuery().eq(SysMenu::getId, sysRoleMenu.getMid()).one())
+                .map(sysMenu -> sysMenu.convert(SysMenuDto.class))
+                .sorted(Comparator.comparingInt(SysMenuDto::getOrderNum))
+                .collect(Collectors.toList());
+        return TreeUtil.buildByLoop(dtos, Constant.ROOT_MENU);
+    }
+
+    @Override
+    public List<SysMenuDto> getAllMenuTree() {
+        List<SysMenuDto> menuDtos = this.lambdaQuery().list().stream()
+                .map(sysMenu -> sysMenu.convert(SysMenuDto.class))
+                .peek(sysMenuDto -> {
+                    List<String> perms = this.sysMenuPermService.getByMenuId(sysMenuDto.getId()).stream().map(SysMenuPerm::getPid).collect(Collectors.toList());
+                    sysMenuDto.setPerms(perms);
+                })
+                .sorted(Comparator.comparingInt(SysMenuDto::getOrderNum))
+                .collect(Collectors.toList());
+        return TreeUtil.buildByLoop(menuDtos, Constant.ROOT_MENU);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateMenu(SysMenu sysMenu, List<String> perms) {
+        if (sysMenu.getParentNum() == null) {
+            sysMenu.setParentNum(-1);
+        }
+        this.updateByIdAndReturn(sysMenu);
+        this.sysMenuPermService.updateByMenuId(sysMenu.getId(), perms);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void createMenu(SysMenu sysMenu, List<String> perms) {
+        if (sysMenu.getParentNum() == null) {
+            sysMenu.setParentNum(-1);
+        }
+        this.save(sysMenu);
+        this.sysMenuPermService.updateByMenuId(sysMenu.getId(), perms);
+    }
+
+    @Override
+    @Transactional
+    public boolean removeById(Serializable id) {
+        this.sysMenuPermService.remove(new LambdaQueryWrapper<SysMenuPerm>().eq(SysMenuPerm::getMid, id));
+        this.sysRoleMenuService.remove(new LambdaQueryWrapper<SysRoleMenu>().eq(SysRoleMenu::getMid, id));
+        return super.removeById(id);
+    }
 }

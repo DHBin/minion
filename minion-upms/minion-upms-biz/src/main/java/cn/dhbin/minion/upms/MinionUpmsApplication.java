@@ -7,6 +7,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author donghaibin
@@ -18,6 +19,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableExposeWeb
 @EnableCaching
 @MapperScan("cn.dhbin.minion.upms.mapper")
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class MinionUpmsApplication {
 
     public static void main(String[] args) {

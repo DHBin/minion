@@ -5,9 +5,11 @@ import cn.dhbin.minion.core.dubbo.web.service.RequestMappingService;
 import cn.dhbin.minion.upms.entity.SysPerm;
 import cn.dhbin.minion.upms.service.SysPermService;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,8 +27,10 @@ public class InitPermissionRunner implements CommandLineRunner {
     private final SysPermService sysPermService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void run(String... args) throws Exception {
         List<RequestMappingInfo> mappingInfos = requestMappingService.all();
+        this.sysPermService.remove(new QueryWrapper<>());
         List<SysPerm> sysPermList = mappingInfos.stream().map(requestMappingInfo -> {
             SysPerm sysPerm = new SysPerm();
             sysPerm.setId(requestMappingInfo.getId());
@@ -38,7 +42,7 @@ public class InitPermissionRunner implements CommandLineRunner {
             sysPerm.setAuthorizations(requestMappingInfo.getAuthorizations());
             return sysPerm;
         }).collect(Collectors.toList());
-        sysPermService.saveOrUpdateBatch(sysPermList);
+        sysPermService.saveBatch(sysPermList);
     }
 
 }

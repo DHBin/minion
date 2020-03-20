@@ -7,5 +7,5 @@ import cn.dhbin.minion.upms.entity.SysPerm;
  * @author donghaibin
  * @date 2020/3/16
  */
-public interface SysApiMapper extends MinionMapper<SysPerm> {
+public interface SysPermMapper extends MinionMapper<SysPerm> {
 }

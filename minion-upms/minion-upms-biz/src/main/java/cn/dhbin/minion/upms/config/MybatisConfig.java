@@ -3,9 +3,9 @@ package cn.dhbin.minion.upms.config;
 import cn.dhbin.core.security.util.SecurityUtil;
 import cn.dhbin.minion.core.common.IUserInfoProvider;
 import cn.dhbin.minion.core.mybatis.plugins.PerformanceInterceptor;
+import cn.dhbin.minion.core.restful.spring.ApplicationUtils;
 import cn.dhbin.minion.upms.service.SysUserService;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class MybatisConfig {
             if (StrUtil.isBlank(username)) {
                 return 0L;
             }
-            SysUserService userService = SpringUtil.getBean(SysUserService.class);
+            SysUserService userService = ApplicationUtils.getBean(SysUserService.class);
             return userService.getByUsername(username).getId();
         };
     }

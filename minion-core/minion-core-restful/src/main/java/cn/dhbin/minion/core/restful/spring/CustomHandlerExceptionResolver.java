@@ -1,7 +1,7 @@
 package cn.dhbin.minion.core.restful.spring;
 
+import cn.dhbin.minion.core.common.enums.ErrorCodeEnum;
 import cn.dhbin.minion.core.common.response.IErrorCode;
-import cn.dhbin.minion.core.restful.enums.ErrorCodeEnum;
 import cn.dhbin.minion.core.restful.exception.ApiException;
 import cn.dhbin.minion.core.restful.util.ResponseUtils;
 import com.fasterxml.jackson.core.JsonParseException;
