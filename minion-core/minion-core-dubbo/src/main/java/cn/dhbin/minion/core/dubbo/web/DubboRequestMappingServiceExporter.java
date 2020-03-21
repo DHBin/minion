@@ -2,15 +2,23 @@ package cn.dhbin.minion.core.dubbo.web;
 
 import cn.dhbin.minion.core.dubbo.web.service.RequestMappingService;
 import cn.dhbin.minion.core.dubbo.web.service.impl.RequestMappingServiceImpl;
+import cn.dhbin.minion.core.dubbo.web.util.DubboUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ProtocolConfig;
+import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -20,13 +28,15 @@ import java.util.function.Supplier;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class DubboRequestMappingServiceExporter {
+public class DubboRequestMappingServiceExporter implements ApplicationContextAware {
 
     private final ApplicationConfig applicationConfig;
 
     private final Supplier<ProtocolConfig> protocolConfigSupplier;
 
     private final RequestMappingHandlerMapping requestMappingHandlerMapping;
+
+    private final List<RegistryConfig> registryConfig;
 
     @Value("${spring.application.name:${dubbo.application.name:application}}")
     private String currentApplicationName;
@@ -35,6 +45,8 @@ public class DubboRequestMappingServiceExporter {
      * The ServiceConfig of RequestMappingService to be exported, can be nullable.
      */
     private ServiceConfig<RequestMappingService> serviceConfig;
+
+    private ApplicationContext context;
 
 
     public void export() {
@@ -51,7 +63,9 @@ public class DubboRequestMappingServiceExporter {
             serviceConfig.setApplication(applicationConfig);
             serviceConfig.setProtocol(protocolConfigSupplier.get());
             serviceConfig.setMerger(Boolean.TRUE.toString());
-
+            ConfigurableEnvironment environment = (ConfigurableEnvironment) context
+                    .getEnvironment();
+            serviceConfig.setRegistries(DubboUtil.resolveRegistryConfigs(registryConfig, environment));
             serviceConfig.export();
 
             if (log.isInfoEnabled()) {
@@ -66,5 +80,10 @@ public class DubboRequestMappingServiceExporter {
                 .mapping(requestMappingHandlerMapping)
                 .owm(currentApplicationName)
                 .build();
+    }
+
+    @Override
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
     }
 }
