@@ -1,5 +1,7 @@
 package cn.dhbin.core.security.util;
 
+import cn.dhbin.core.security.component.MinionUser;
+import cn.hutool.core.convert.Convert;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,4 +31,20 @@ public class SecurityUtil {
         return null;
     }
 
+    @Nullable
+    public static MinionUser getUser() {
+        OAuth2Authentication oAuth2Authentication = getOAuth2Authentication();
+        if (oAuth2Authentication != null) {
+            return (MinionUser) oAuth2Authentication.getPrincipal();
+        }
+        return null;
+    }
+
+    @Nullable
+    public static Long getUserId() {
+        if (getUser() != null) {
+            return Convert.toLong(getUser().getId());
+        }
+        return null;
+    }
 }

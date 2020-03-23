@@ -4,7 +4,6 @@ import cn.dhbin.core.security.util.SecurityUtil;
 import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
 import cn.dhbin.minion.upms.entity.SysMenu;
-import cn.dhbin.minion.upms.entity.SysUser;
 import cn.dhbin.minion.upms.model.dto.SysMenuDto;
 import cn.dhbin.minion.upms.model.param.SysMenuParam;
 import cn.dhbin.minion.upms.model.param.UpdateRoleMenuParam;
@@ -46,18 +45,14 @@ public class SysMenuController extends RestfulController {
     @GetMapping("/getTopMenu")
     @ApiOperation(value = "获取顶部菜单")
     public ApiResponse<?> getTopMenu() {
-        String username = SecurityUtil.getUsername();
-        SysUser sysUser = sysUserService.getByUsername(username);
-        List<SysMenuDto> sysMenuDtos = sysMenuService.getTopMenuByUserId(sysUser.getId());
+        List<SysMenuDto> sysMenuDtos = sysMenuService.getTopMenuByUserId(SecurityUtil.getUserId());
         return ok(sysMenuDtos);
     }
 
     @GetMapping("/getMenu")
     @ApiOperation(value = "获取左侧菜单")
     public ApiResponse<?> getMenu(@RequestParam(required = false, defaultValue = "-1") Integer parentId) {
-        String username = SecurityUtil.getUsername();
-        SysUser sysUser = sysUserService.getByUsername(username);
-        List<SysMenuDto> sysMenuDtos = sysMenuService.getMenuTreeByUserId(sysUser.getId(), parentId);
+        List<SysMenuDto> sysMenuDtos = sysMenuService.getMenuTreeByUserId(SecurityUtil.getUserId(), parentId);
         return ok(sysMenuDtos);
     }
 

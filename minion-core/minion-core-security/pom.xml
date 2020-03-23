@@ -19,10 +19,29 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
+        <!--Redis 模块-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!--common-->
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-common</artifactId>
         </dependency>
+        <!--Dubbo-->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-dubbo</artifactId>
+        </dependency>
+
+        <!--管理平台接口-->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-upms-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>

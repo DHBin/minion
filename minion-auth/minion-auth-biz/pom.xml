@@ -22,11 +22,6 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-        <!--安全模块 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
         <!--web 模块-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -59,7 +54,11 @@
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-common</artifactId>
         </dependency>
-
+        <!--Dubbo-->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-security</artifactId>
+        </dependency>
         <!--Dubbo-->
         <dependency>
             <groupId>cn.dhbin</groupId>
@@ -70,14 +69,6 @@
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-log</artifactId>
-        </dependency>
-
-
-        <!--管理平台接口-->
-        <dependency>
-            <groupId>cn.dhbin</groupId>
-            <artifactId>minion-upms-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <!--鉴权平台接口-->

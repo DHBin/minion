@@ -1,5 +1,7 @@
-package cn.dhbin.minion.auth.config;
+package cn.dhbin.core.security.server;
 
+import cn.dhbin.core.security.component.DelegatesHttpSecurityHandler;
+import cn.dhbin.core.security.component.HttpSecurityHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,15 +23,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    /**
-     * 排除swagger文档路径
-     */
-    private static final String SWAGGER_DOC_PATH = "/v2/api-docs";
-
-    /**
-     * 监控接口
-     */
-    private static final String ACTUATOR_PATH = "/actuator/**";
+    private final HttpSecurityHandler httpSecurityHandler = new DelegatesHttpSecurityHandler();
 
     @Override
     protected UserDetailsService userDetailsService() {
@@ -38,11 +32,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers(SWAGGER_DOC_PATH).permitAll()
-                .antMatchers(ACTUATOR_PATH).permitAll()
-                .anyRequest().authenticated();
+        httpSecurityHandler.handle(http);
     }
 
     @Bean

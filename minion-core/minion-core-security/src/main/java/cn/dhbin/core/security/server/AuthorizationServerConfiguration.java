@@ -1,9 +1,9 @@
-package cn.dhbin.minion.auth.config;
+package cn.dhbin.core.security.server;
 
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.oauth2.authserver.AuthorizationServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.authserver.OAuth2AuthorizationServerConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import javax.sql.DataSource;
@@ -24,20 +25,25 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableAuthorizationServer
-public class AuthConfiguration extends OAuth2AuthorizationServerConfiguration {
+@ComponentScan("cn.dhbin.core.security.server")
+public class AuthorizationServerConfiguration extends OAuth2AuthorizationServerConfiguration {
 
     private final UserDetailsService userDetailsService;
 
     private final DataSource dataSource;
 
-    public AuthConfiguration(BaseClientDetails details, AuthenticationConfiguration authenticationConfiguration,
-                             ObjectProvider<TokenStore> tokenStore, ObjectProvider<AccessTokenConverter> tokenConverter,
-                             AuthorizationServerProperties properties,
-                             DataSource dataSource,
-                             @Qualifier("minionUserDetailsServiceImpl") UserDetailsService userDetailsService) throws Exception {
+    private final TokenEnhancer tokenEnhancer;
+
+    public AuthorizationServerConfiguration(BaseClientDetails details, AuthenticationConfiguration authenticationConfiguration,
+                                            ObjectProvider<TokenStore> tokenStore, ObjectProvider<AccessTokenConverter> tokenConverter,
+                                            AuthorizationServerProperties properties,
+                                            DataSource dataSource,
+                                            UserDetailsService userDetailsService,
+                                            TokenEnhancer tokenEnhancer) throws Exception {
         super(details, authenticationConfiguration, tokenStore, tokenConverter, properties);
         this.dataSource = dataSource;
         this.userDetailsService = userDetailsService;
+        this.tokenEnhancer = tokenEnhancer;
     }
 
 
@@ -46,6 +52,7 @@ public class AuthConfiguration extends OAuth2AuthorizationServerConfiguration {
         super.configure(endpoints);
         endpoints
                 .reuseRefreshTokens(true)
+                .tokenEnhancer(tokenEnhancer)
                 .userDetailsService(userDetailsService);
     }
 
