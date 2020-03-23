@@ -29,15 +29,12 @@ public class MinionResourceServerConfiguration extends ResourceServerConfigurerA
 
     private final HttpSecurityHandler httpSecurityHandler = new DelegatesHttpSecurityHandler();
 
-//    private final UserDetailsService userDetailsService;
-
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         DefaultAccessTokenConverter accessTokenConverter = new DefaultAccessTokenConverter();
         MinionUserAuthenticationConverter userTokenConverter = new MinionUserAuthenticationConverter();
         // setUserDetailsService会导致客户端执行userDetailsService#loadUserByUsername加载权限
-        // userTokenConverter.setUserDetailsService(userDetailsService);
         accessTokenConverter.setUserTokenConverter(userTokenConverter);
         remoteTokenServices.setRestTemplate(restTemplate);
         remoteTokenServices.setAccessTokenConverter(accessTokenConverter);

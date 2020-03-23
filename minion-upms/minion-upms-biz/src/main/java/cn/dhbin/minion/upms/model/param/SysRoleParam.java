@@ -18,7 +18,7 @@ public class SysRoleParam implements Convert {
 
     private static final long serialVersionUID = 2816556975675989486L;
 
-    @NotNull(groups = UPDATE.class)
+    @NotNull(groups = Update.class)
     private Long id;
 
     @NotBlank
@@ -32,10 +32,10 @@ public class SysRoleParam implements Convert {
 
     private List<String> perms;
 
-    public interface CREATE {
+    public interface Create {
     }
 
-    public interface UPDATE {
+    public interface Update {
     }
 
 }

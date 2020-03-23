@@ -6,12 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author donghaibin
  * @date 2020/3/20
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName(value = "sys_menu_perm")
 public class SysMenuPerm extends BaseEntity {
 

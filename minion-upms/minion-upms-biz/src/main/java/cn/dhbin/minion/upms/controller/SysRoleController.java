@@ -49,7 +49,7 @@ public class SysRoleController extends RestfulController {
     @PostMapping
     @ApiOperation(value = "创建角色", authorizations = @Authorization("sys_role_create"))
     @PreAuthorize("hasAuthority('sys_role_create')")
-    public ApiResponse<?> create(@Validated(SysRoleParam.CREATE.class) @RequestBody SysRoleParam sysRoleParam) {
+    public ApiResponse<?> create(@Validated(SysRoleParam.Create.class) @RequestBody SysRoleParam sysRoleParam) {
         SysRole sysRole = sysRoleParam.convert(SysRole.class);
         this.sysRoleService.create(sysRole, sysRoleParam.getPerms());
         return created();
@@ -58,7 +58,7 @@ public class SysRoleController extends RestfulController {
     @PutMapping
     @ApiOperation(value = "更新角色", authorizations = @Authorization("sys_role_update"))
     @PreAuthorize("hasAuthority('sys_role_update')")
-    public ApiResponse<?> update(@Validated(SysRoleParam.UPDATE.class) @RequestBody SysRoleParam sysRoleParam) {
+    public ApiResponse<?> update(@Validated(SysRoleParam.Update.class) @RequestBody SysRoleParam sysRoleParam) {
         SysRole sysRole = sysRoleParam.convert(SysRole.class);
         this.sysRoleService.update(sysRole, sysRoleParam.getPerms());
         return created();

@@ -30,15 +30,15 @@ public class SysUserParam implements Convert {
     @NotBlank
     private String email;
 
-    @NotBlank(groups = {CREATE.class})
+    @NotBlank(groups = {Create.class})
     private String password;
 
     private List<Long> roles;
 
-    public interface UPDATE {
+    public interface Update {
     }
 
-    public interface CREATE {
+    public interface Create {
     }
 
 

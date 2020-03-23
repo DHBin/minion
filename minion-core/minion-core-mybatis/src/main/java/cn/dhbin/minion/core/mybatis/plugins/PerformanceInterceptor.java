@@ -1,5 +1,6 @@
 package cn.dhbin.minion.core.mybatis.plugins;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.sql.SqlFormatter;
 import com.baomidou.mybatisplus.core.toolkit.*;
 import lombok.Getter;
@@ -32,12 +33,13 @@ import java.util.*;
         @Signature(type = StatementHandler.class, method = "update", args = {Statement.class}),
         @Signature(type = StatementHandler.class, method = "batch", args = {Statement.class})
 })
+@SuppressWarnings("all")
 public class PerformanceInterceptor implements Interceptor {
 
     private static final Log logger = LogFactory.getLog(PerformanceInterceptor.class);
-    private static final String DruidPooledPreparedStatement = "com.alibaba.druid.pool.DruidPooledPreparedStatement";
-    private static final String T4CPreparedStatement = "oracle.jdbc.driver.T4CPreparedStatement";
-    private static final String OraclePreparedStatementWrapper = "oracle.jdbc.driver.OraclePreparedStatementWrapper";
+    private static final String DRUID_POOL_DRUID_POOLED_PREPARED_STATEMENT = "com.alibaba.druid.pool.DruidPooledPreparedStatement";
+    private static final String T4C_PREPARED_STATEMENT = "oracle.jdbc.driver.T4CPreparedStatement";
+    private static final String ORACLE_JDBC_DRIVER_ORACLE_PREPARED_STATEMENT_WRAPPER = "oracle.jdbc.driver.OraclePreparedStatementWrapper";
     /**
      * SQL 执行最大时长，超过自动停止运行，有助于发现问题。
      */
@@ -90,10 +92,10 @@ public class PerformanceInterceptor implements Interceptor {
 
         String originalSql = null;
         String stmtClassName = statement.getClass().getName();
-        if (DruidPooledPreparedStatement.equals(stmtClassName)) {
+        if (DRUID_POOL_DRUID_POOLED_PREPARED_STATEMENT.equals(stmtClassName)) {
             try {
                 if (druidGetSQLMethod == null) {
-                    Class<?> clazz = Class.forName(DruidPooledPreparedStatement);
+                    Class<?> clazz = Class.forName(DRUID_POOL_DRUID_POOLED_PREPARED_STATEMENT);
                     druidGetSQLMethod = clazz.getMethod("getSql");
                 }
                 Object stmtSql = druidGetSQLMethod.invoke(statement);
@@ -103,8 +105,8 @@ public class PerformanceInterceptor implements Interceptor {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (T4CPreparedStatement.equals(stmtClassName)
-                || OraclePreparedStatementWrapper.equals(stmtClassName)) {
+        } else if (T4C_PREPARED_STATEMENT.equals(stmtClassName)
+                || ORACLE_JDBC_DRIVER_ORACLE_PREPARED_STATEMENT_WRAPPER.equals(stmtClassName)) {
             try {
                 if (oracleGetOriginalSqlMethod != null) {
                     Object stmtSql = oracleGetOriginalSqlMethod.invoke(statement);
@@ -178,11 +180,11 @@ public class PerformanceInterceptor implements Interceptor {
     public void setProperties(Properties prop) {
         String maxTime = prop.getProperty("maxTime");
         String format = prop.getProperty("format");
-        if (StringUtils.isNotEmpty(maxTime)) {
+        if (StrUtil.isNotEmpty(maxTime)) {
             this.maxTime = Long.parseLong(maxTime);
         }
-        if (StringUtils.isNotEmpty(format)) {
-            this.format = Boolean.valueOf(format);
+        if (StrUtil.isNotEmpty(format)) {
+            this.format = Boolean.parseBoolean(format);
         }
     }
 

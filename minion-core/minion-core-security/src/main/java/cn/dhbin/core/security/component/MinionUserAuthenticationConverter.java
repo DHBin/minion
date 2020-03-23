@@ -46,6 +46,7 @@ public class MinionUserAuthenticationConverter implements UserAuthenticationConv
                 .arrayToCommaDelimitedString(defaultAuthorities));
     }
 
+    @Override
     public Map<String, ?> convertUserAuthentication(Authentication authentication) {
         Map<String, Object> response = new LinkedHashMap<String, Object>();
         response.put(USERNAME, authentication.getName());

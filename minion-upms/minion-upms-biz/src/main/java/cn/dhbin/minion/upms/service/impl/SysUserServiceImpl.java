@@ -55,7 +55,7 @@ public class SysUserServiceImpl extends MinionServiceImpl<SysUserMapper, SysUser
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @CacheEvict(cacheNames = CACHE_NAME, key = "#sysUser.id")
     public void createUser(SysUser sysUser, List<Long> roles) {
         Integer count = this.lambdaQuery().eq(SysUser::getUsername, sysUser.getUsername()).count();

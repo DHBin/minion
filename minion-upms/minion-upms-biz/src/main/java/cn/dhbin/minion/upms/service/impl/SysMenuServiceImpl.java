@@ -122,7 +122,7 @@ public class SysMenuServiceImpl extends MinionServiceImpl<SysMenuMapper, SysMenu
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean removeById(Serializable id) {
         this.sysMenuPermService.remove(new LambdaQueryWrapper<SysMenuPerm>().eq(SysMenuPerm::getMid, id));
         this.sysRoleMenuService.remove(new LambdaQueryWrapper<SysRoleMenu>().eq(SysRoleMenu::getMid, id));

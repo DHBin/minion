@@ -62,19 +62,15 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
         }
     }
 
-    private class LocalDateConverter implements Converter<Temporal, Object> {
-
-        @Override
-        public Object convert(MappingContext<Temporal, Object> mappingContext) {
-            LocalDate source = (LocalDate) mappingContext.getSource();
-            Class<?> destinationType = mappingContext.getDestinationType();
-            if (destinationType.equals(String.class))
-                return DateTimeFormatter.ofPattern(config.getDatePattern())
-                        .format(source);
-
-            LocalDateTime localDateTime = source.atStartOfDay();
-            return convertLocalDateTime(localDateTime, mappingContext);
+    private Object convertLocalDateTime(LocalDateTime source, MappingContext<?, ?> mappingContext) {
+        Class<?> destinationType = mappingContext.getDestinationType();
+        if (destinationType.equals(String.class)) {
+            return DateTimeFormatter.ofPattern(config.getDateTimePattern())
+                    .format(source);
         }
+
+        Instant instant = source.atZone(config.getZoneId()).toInstant();
+        return convertInstant(instant, mappingContext);
     }
 
     private class InstantConverter implements Converter<Temporal, Object> {
@@ -86,14 +82,20 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
         }
     }
 
-    private Object convertLocalDateTime(LocalDateTime source, MappingContext<?, ?> mappingContext) {
-        Class<?> destinationType = mappingContext.getDestinationType();
-        if (destinationType.equals(String.class))
-            return DateTimeFormatter.ofPattern(config.getDateTimePattern())
-                    .format(source);
+    private class LocalDateConverter implements Converter<Temporal, Object> {
 
-        Instant instant = source.atZone(config.getZoneId()).toInstant();
-        return convertInstant(instant, mappingContext);
+        @Override
+        public Object convert(MappingContext<Temporal, Object> mappingContext) {
+            LocalDate source = (LocalDate) mappingContext.getSource();
+            Class<?> destinationType = mappingContext.getDestinationType();
+            if (destinationType.equals(String.class)) {
+                return DateTimeFormatter.ofPattern(config.getDatePattern())
+                        .format(source);
+            }
+
+            LocalDateTime localDateTime = source.atStartOfDay();
+            return convertLocalDateTime(localDateTime, mappingContext);
+        }
     }
 
     private Object convertInstant(Instant source, MappingContext<?, ?> mappingContext) {

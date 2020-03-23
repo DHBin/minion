@@ -18,7 +18,7 @@ import java.util.List;
 public class SysMenuParam implements Convert {
     private static final long serialVersionUID = 4209687835379582603L;
 
-    @NotNull(groups = UPDATE.class)
+    @NotNull(groups = Update.class)
     private Long id;
 
     @NotBlank
@@ -46,10 +46,10 @@ public class SysMenuParam implements Convert {
 
     private List<String> perms;
 
-    public interface CREATE {
+    public interface Create {
     }
 
-    public interface UPDATE {
+    public interface Update {
     }
 
 }

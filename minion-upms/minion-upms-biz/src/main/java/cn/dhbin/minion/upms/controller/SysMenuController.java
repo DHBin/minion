@@ -83,7 +83,7 @@ public class SysMenuController extends RestfulController {
     @PutMapping
     @ApiOperation(value = "更新菜单", authorizations = @Authorization("sys_menu_update"))
     @PreAuthorize("hasAuthority('sys_menu_update')")
-    public ApiResponse<?> update(@Validated(SysMenuParam.UPDATE.class) @RequestBody SysMenuParam sysMenuParam) {
+    public ApiResponse<?> update(@Validated(SysMenuParam.Update.class) @RequestBody SysMenuParam sysMenuParam) {
         this.sysMenuService.updateMenu(sysMenuParam.convert(SysMenu.class), sysMenuParam.getPerms());
         return created();
     }
@@ -91,7 +91,7 @@ public class SysMenuController extends RestfulController {
     @PostMapping
     @ApiOperation(value = "创建菜单", authorizations = @Authorization("sys_menu_create"))
     @PreAuthorize("hasAuthority('sys_menu_create')")
-    public ApiResponse<?> create(@Validated(SysMenuParam.CREATE.class) @RequestBody SysMenuParam sysMenuParam) {
+    public ApiResponse<?> create(@Validated(SysMenuParam.Create.class) @RequestBody SysMenuParam sysMenuParam) {
         this.sysMenuService.createMenu(sysMenuParam.convert(SysMenu.class), sysMenuParam.getPerms());
         return created();
     }

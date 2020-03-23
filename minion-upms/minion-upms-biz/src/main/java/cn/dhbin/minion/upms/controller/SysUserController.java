@@ -50,7 +50,7 @@ public class SysUserController extends RestfulController {
     @GetMapping("/logout")
     @ApiOperation(value = "登出")
     public ApiResponse<?> logout() {
-        OAuth2Authentication oAuth2Authentication = Objects.requireNonNull(SecurityUtil.getOAuth2Authentication());
+        OAuth2Authentication oAuth2Authentication = Objects.requireNonNull(SecurityUtil.getAuthentication());
         String clientId = oAuth2Authentication.getOAuth2Request().getClientId();
         String name = oAuth2Authentication.getUserAuthentication().getName();
         return success(tokenService.removeToken(clientId, name));
@@ -66,7 +66,7 @@ public class SysUserController extends RestfulController {
     @PutMapping
     @ApiOperation(value = "更新用户", authorizations = @Authorization("sys_user_update"))
     @PreAuthorize("hasAuthority('sys_user_update')")
-    public ApiResponse<?> update(@Validated(SysUserParam.UPDATE.class) @RequestBody SysUserParam sysUserParam) {
+    public ApiResponse<?> update(@Validated(SysUserParam.Update.class) @RequestBody SysUserParam sysUserParam) {
         SysUser sysUser = sysUserParam.convert(SysUser.class);
         this.sysUserService.updateUser(sysUser, sysUserParam.getRoles());
         return created();
@@ -75,7 +75,7 @@ public class SysUserController extends RestfulController {
     @PostMapping
     @ApiOperation(value = "创建用户", authorizations = @Authorization("sys_user_create"))
     @PreAuthorize("hasAuthority('sys_user_create')")
-    public ApiResponse<?> create(@Validated(SysUserParam.CREATE.class) @RequestBody SysUserParam sysUserParam) {
+    public ApiResponse<?> create(@Validated(SysUserParam.Create.class) @RequestBody SysUserParam sysUserParam) {
         SysUser sysUser = sysUserParam.convert(SysUser.class);
         this.sysUserService.createUser(sysUser, sysUserParam.getRoles());
         return created();

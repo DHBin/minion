@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 public interface HttpSecurityHandler {
 
     /**
+     * 处理HttpSecurity
+     *
      * @param http httpSecurity
      * @throws Exception ex
      */
