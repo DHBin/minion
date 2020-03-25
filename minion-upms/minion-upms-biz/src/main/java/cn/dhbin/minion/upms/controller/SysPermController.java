@@ -11,9 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,6 +38,23 @@ public class SysPermController extends RestfulController {
     @PreAuthorize("hasAuthority('sys_perm_list')")
     public ApiResponse<IPage<SysPermDto>> page(PageModel<SysPerm> page) {
         return success(this.sysPermService.page(page));
+    }
+
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除权限", authorizations = @Authorization("sys_perm_delete"))
+    @PreAuthorize("hasAuthority('sys_perm_delete')")
+    public ApiResponse<?> delete(@PathVariable String id) {
+        this.sysPermService.removeById(id);
+        return created();
+    }
+
+    @PutMapping("/reload")
+    @ApiOperation(value = "重载权限", authorizations = @Authorization("sys_perm_reload"))
+    @PreAuthorize("hasAuthority('sys_perm_reload')")
+    public ApiResponse<?> reload() {
+        this.sysPermService.reload();
+        return created();
     }
 
 }

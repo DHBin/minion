@@ -38,6 +38,11 @@ public interface SysPermService extends IMinionService<SysPerm> {
     List<SysPermDto> all();
 
     /**
+     * 重载权限列表
+     */
+    void reload();
+
+    /**
      * 分页
      *
      * @param pageModel 分页
