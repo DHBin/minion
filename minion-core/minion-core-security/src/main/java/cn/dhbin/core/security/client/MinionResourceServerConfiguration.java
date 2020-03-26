@@ -1,11 +1,13 @@
 package cn.dhbin.core.security.client;
 
 import cn.dhbin.core.security.component.DelegatesHttpSecurityHandler;
-import cn.dhbin.core.security.component.HttpSecurityHandler;
+import cn.dhbin.core.security.component.IgnoreUrlHttpSecurityHandler;
 import cn.dhbin.core.security.component.MinionUserAuthenticationConverter;
+import cn.dhbin.core.security.properties.SecurityProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,14 +23,16 @@ import org.springframework.web.client.RestTemplate;
  */
 @Configuration
 @RequiredArgsConstructor
+@Import(SecurityProperties.class)
 public class MinionResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
     private final RestTemplate restTemplate;
 
     private final RemoteTokenServices remoteTokenServices;
 
-    private final HttpSecurityHandler httpSecurityHandler = new DelegatesHttpSecurityHandler();
+    private final SecurityProperties securityProperties;
 
+    private final DelegatesHttpSecurityHandler httpSecurityHandler = new DelegatesHttpSecurityHandler();
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
@@ -43,7 +47,9 @@ public class MinionResourceServerConfiguration extends ResourceServerConfigurerA
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        httpSecurityHandler.add(new IgnoreUrlHttpSecurityHandler(securityProperties.getIgnoreUrl()));
         httpSecurityHandler.handle(http);
+        http.authorizeRequests().anyRequest().authenticated();
     }
 
     @Bean

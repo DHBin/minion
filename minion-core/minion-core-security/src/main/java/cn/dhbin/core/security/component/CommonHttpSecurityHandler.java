@@ -16,8 +16,7 @@ public class CommonHttpSecurityHandler implements HttpSecurityHandler {
         http
                 .authorizeRequests()
                 .antMatchers(SWAGGER_DOC_PATH).permitAll()
-                .antMatchers(ACTUATOR_PATH).permitAll()
-                .anyRequest().authenticated();
+                .antMatchers(ACTUATOR_PATH).permitAll();
     }
 
 }

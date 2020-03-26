@@ -25,5 +25,9 @@ public class DelegatesHttpSecurityHandler implements HttpSecurityHandler {
         }
     }
 
+    public void add(HttpSecurityHandler handler) {
+        delegates.add(handler);
+    }
+
 
 }
