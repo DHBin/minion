@@ -206,7 +206,7 @@ import $!{tableInfo.savePackageName}.entity.$!tableInfo.name;
 import $!{tableInfo.savePackageName}.model.dto.$!{tableInfo.name}Dto;
 import $!{tableInfo.savePackageName}.model.param.$!{tableInfo.name}Param;
 import $!{tableInfo.savePackageName}.model.query.$!{tableInfo.name}Query;
-import $!{tableInfo.savePackageName}.service.DemoUserService;
+import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.Api;
@@ -235,8 +235,8 @@ public class $!{tableName} extends RestfulController {
      */
     @GetMapping
     @ApiOperation(value = "分页获取$comment", authorizations = @Authorization("$!{tableInfo.obj.name}_page}"))
-    public ApiResponse<?> page(PageModel<DemoUser> pageModel, $!{tableInfo.name}Query query) {
-        IPage<DemoUserDto> record = this.$serviceName
+    public ApiResponse<?> page(PageModel<$!{tableInfo.name}> pageModel, $!{tableInfo.name}Query query) {
+        IPage<$!{tableInfo.name}Dto> record = this.$serviceName
                 .page(pageModel.convert(), Wrappers.lambdaQuery(query.convert($!{tableInfo.name}.class)))
                 .convert($!{tool.firstLowerCase($!tableInfo.name)} -> ${tool.firstLowerCase($!tableInfo.name)}.convert($!{tableInfo.name}Dto.class));
         return ok(record);
@@ -287,6 +287,7 @@ public class $!{tableName} extends RestfulController {
     }
 
 }
+
 
 ```
 
