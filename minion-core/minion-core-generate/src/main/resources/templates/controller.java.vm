@@ -1,0 +1,115 @@
+package $!{package.Controller};
+
+
+import cn.dhbin.minion.core.common.response.ApiResponse;
+import cn.dhbin.minion.core.mybatis.model.PageModel;
+import $!{package.Entity}.$!{table.entityName};
+import $!{cfg.dtoPackage}.$!{table.entityName}Dto;
+import $!{cfg.paramPackage}.$!{table.entityName}Param;
+import $!{cfg.queryPackage}.$!{table.entityName}Query;
+import $!{package.Service}.$!{table.serviceName};
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author $!{author}
+ * @since $!{date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+    #if(${superControllerClass})
+    @RequiredArgsConstructor
+    @Api(tags = "$!{table.comment}")
+    public class ${table.controllerName} extends ${superControllerClass} {
+    #else
+    @RequiredArgsConstructor
+    @Api(tags = "$!{table.comment}")
+    public class ${table.controllerName} {
+    #end
+
+private final $!{table.entityName}Service $!{firstLowerServiceName};
+
+/**
+* 分页获取
+*/
+@GetMapping
+@ApiOperation(value = "分页获取 $!{table.comment}", authorizations = @Authorization("$!{table.name}_page}"))
+public ApiResponse<?> page(PageModel<$!{table.entityName}> pageModel, $!{table.entityName}Query query){
+        IPage<$!{table.entityName}Dto> record=this.$!{firstLowerServiceName}
+        .page(pageModel.convert(),Wrappers.lambdaQuery(query.convert($!{table.entityName}.class)))
+        .convert($!{firstLowerEntityName} -> $!{firstLowerEntityName}.convert($!{table.entityName}Dto.class));
+        return ok(record);
+        }
+
+/**
+* 新建
+*/
+@PostMapping
+@ApiOperation(value = "新建$!{table.comment}", authorizations = @Authorization("$!{table.name}_create"))
+public ApiResponse<?> create(@Validated @RequestBody $!{table.entityName}Param param){
+        param.setId(null);
+        this.$!{firstLowerServiceName}.save(param.convert($!{table.entityName}.class));
+        return created();
+        }
+
+/**
+ * 删除
+ */
+@DeleteMapping("{id:\\d+}")
+@ApiOperation(value = "删除$!{table.comment}", authorizations = @Authorization("$!{table.name}_delete"))
+public ApiResponse<?> delete(@PathVariable Long id){
+        this.$!{firstLowerServiceName}.removeById(id);
+        return noContent();
+        }
+
+/**
+ * 更新
+ */
+@PutMapping
+@ApiOperation(value = "更新$!{table.comment}", authorizations = @Authorization("$!{table.name}_update"))
+public ApiResponse<?> update(@Validated @RequestBody $!{table.entityName}Param param){
+        this.$!{firstLowerServiceName}.updateByIdAndReturn(param.convert($!{table.entityName}.class));
+        return created();
+        }
+
+/**
+ * 通过id获取
+ *
+ * @param id 主键
+ */
+@GetMapping("{id:\\d+}")
+@ApiOperation(value = "通过id获取$!{table.comment}", authorizations = @Authorization("$!{table.name}_retrieve"))
+public ApiResponse<?> retrieve(@PathVariable("id") Long id){
+        return ok(this.$!{firstLowerServiceName}.getById(id));
+        }
+
+        }
+
+#end

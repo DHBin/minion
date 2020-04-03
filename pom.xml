@@ -25,6 +25,7 @@
         <spring-boot-admin.version>2.2.2</spring-boot-admin.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <swagger.version>1.5.22</swagger.version>
+        <velocity.version>2.2</velocity.version>
     </properties>
 
     <modules>
@@ -74,6 +75,16 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.alibaba.nacos</groupId>
+                        <artifactId>nacos-client</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.alibaba.nacos</groupId>
+                        <artifactId>nacos-config</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!--minion core-->
             <dependency>
@@ -83,6 +94,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-config</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+
             <!--knife4j-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
@@ -115,6 +138,18 @@
                 <artifactId>mybatis-plus-annotation</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!--模板引擎-->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <!--文档-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>

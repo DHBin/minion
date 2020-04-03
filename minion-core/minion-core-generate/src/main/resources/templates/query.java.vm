@@ -1,0 +1,48 @@
+package $!{cfg.queryPackage};
+
+    #foreach($pkg in ${table.importPackages})
+    import ${pkg};
+    #end
+    #if(${entityLombokModel})
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    #end
+    #if(${swagger2})
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    #end
+import cn.dhbin.minion.core.tool.converter.Convert;
+
+
+/**
+ * <p>
+ * $!{table.comment} Query
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Data
+@EqualsAndHashCode
+    #if(${swagger2})
+    @ApiModel(value = "${entity}Query", description = "$!{table.comment}")
+    #end
+public class $!{entity}Query implements Convert {
+
+    private static final long serialVersionUID = 1L;
+
+    #foreach($field in ${table.fields})
+
+        #if("$!field.comment" != "")
+            #if(${swagger2})
+            @ApiModelProperty(value = "${field.comment}")
+            #else
+            /**
+             * ${field.comment}
+             */
+            #end
+        #end
+    private $!{field.propertyType} $!{field.propertyName};
+
+    #end
+}
