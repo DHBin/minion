@@ -94,7 +94,6 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
                 handleConstraintViolationException((ConstraintViolationException) ex, request, response);
             } else {
                 handleException(ex, request, response);
-                log.error("error: doResolveException [{}]", ex.getMessage(), ex);
             }
         } catch (Exception handlerException) {
             if (log.isWarnEnabled()) {
@@ -104,6 +103,8 @@ public class CustomHandlerExceptionResolver extends AbstractHandlerExceptionReso
         if (ex instanceof ApiException) {
             IErrorCode<?> errorCode = ((ApiException) ex).getErrorCode();
             log.info("Info: doResolveException [{}]", errorCode.getMsg());
+        } else {
+            log.error("Error: doResolveException [{}]", ex.getMessage(), ex);
         }
         return MODEL_VIEW_INSTANCE;
     }
