@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>minion</artifactId>
+        <groupId>cn.dhbin</groupId>
+        <version>1.0.6-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>minion-distribution</artifactId>
+    <description>打包程序</description>
+    <packaging>pom</packaging>
+
+    <!--  依赖  -->
+    <dependencies>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-auth-biz</artifactId>
+            <version>1.0.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-gateway</artifactId>
+            <version>1.0.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-upms-biz</artifactId>
+            <version>1.0.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-monitor</artifactId>
+            <version>1.0.6-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
+                    <tarLongFileMode>posix</tarLongFileMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>minion</finalName>
+    </build>
+
+</project>

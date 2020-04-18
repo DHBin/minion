@@ -35,6 +35,7 @@
         <module>minion-upms</module>
         <module>minion-auth</module>
         <module>minion-monitor</module>
+        <module>minion-distribution</module>
     </modules>
 
     <dependencies>
