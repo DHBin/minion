@@ -53,18 +53,6 @@ spring:
     username: 数据库用户名
     password: 数据库密码
     url: jdbc:mysql://minion-mysql:3306/minion_auth?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
-dubbo:
-  scan:
-    base-packages: cn.dhbin.minion.auth.service.impl;
-  protocol:
-    name: dubbo
-    port: 20880
-  consumer:
-    check: false
-  registry:
-    address: zookeeper://minion-zookeeper:2181
-  cloud:
-    subscribed-services: minion-upms-biz
 ```
 
 > minion-gateway-dev.yml
@@ -115,14 +103,4 @@ security:
       client-secret: test
     resource:
       token-info-uri: http://minion-auth-biz/oauth/check_token
-dubbo:
-  scan:
-    base-packages: cn.dhbin.minion.upms.service.impl
-  protocol:
-    name: dubbo
-    port: 20881
-  registry:
-    address: zookeeper://minion-zookeeper:2181
-  cloud:
-    subscribed-services: minion-auth-biz
 ```

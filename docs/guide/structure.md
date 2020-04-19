@@ -16,6 +16,7 @@
 │   ├── minion-core-swagger							封装swagger
 │   └── minion-core-tool							工具类
 ├── minion-gateway									网关
+├── minion-distribution							    打包模块
 ├── minion-monitor									监控
 └── minion-upms										用户权限管理系统
     ├── minion-upms-api
