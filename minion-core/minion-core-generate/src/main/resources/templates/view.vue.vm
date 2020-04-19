@@ -1,0 +1,122 @@
+<template>
+    <basic-container>
+        <avue-crud
+                :permission="perm"
+                :data="data"
+                :option="option"
+                v-model="obj"
+                :table-loading="listLoading"
+                :page.sync="page"
+                :before-open="beforeOpen"
+                @size-change="sizeChange"
+                @current-change="currentChange"
+                @row-save="rowSave"
+                @row-update="rowUpdate"
+                @row-del="rowDel"
+                @refresh-change="refresh"
+        >
+        </avue-crud>
+    </basic-container>
+</template>
+
+<script>
+    import {tableOption} from '@/const';
+    import {createObj, deleteObj, fetchList, updateObj} from '@/api'
+    import {mapGetters} from 'vuex'
+
+    export default {
+        name: "$!{firstLowerEntityName}",
+        computed: {
+            ...mapGetters(['permission']),
+            perm() {
+                return {
+                    addBtn: this.vaildData(this.permission['$!{table.name}_create'], false),
+                    editBtn: this.vaildData(this.permission['$!{table.name}_update'], false),
+                    delBtn: this.vaildData(this.permission['$!{table.name}_delete'], false),
+                }
+            }
+        },
+        data() {
+            return {
+                option: tableOption,
+                data: [],
+                obj: {},
+                page: {
+                    total: 0,
+                    currentPage: 1,
+                    pageSize: 10
+                },
+                listLoading: true
+            }
+        },
+        created() {
+            this.getList(this.page)
+        },
+        methods: {
+            // dialog打开前回调
+            beforeOpen(done, type) {
+                done();
+            },
+            // 获取列表
+            getList(page, params) {
+                fetchList(Object.assign({
+                    current: page.currentPage,
+                    size: page.pageSize
+                }, params)).then((res) => {
+                    let result = res.data.result;
+                    this.data = result.records;
+                    this.page.total = result.total;
+                    this.listLoading = false;
+                })
+            },
+            // 响应分页大小改变
+            sizeChange(val) {
+                this.page.currentPage = 1;
+                this.page.pageSize = val;
+                this.getList(this.page)
+            },
+            // 响应页数改变
+            currentChange(val) {
+                this.page.currentPage = val;
+                this.getList(this.page)
+            },
+            // 保存
+            rowSave(row, done, loading) {
+                createObj(row).then(() => {
+                    this.refresh();
+                    done();
+                    this.$message.success('创建成功');
+                }).catch(() => loading())
+            },
+            // 更新
+            rowUpdate(row, index, done, loading) {
+                updateObj(row).then(() => {
+                    this.refresh();
+                    done();
+                    this.$message.success('修改成功');
+                }).catch(() => loading())
+            },
+            // 删除
+            rowDel(row) {
+                this.$confirm('此操作将删除该数据, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    deleteObj(row.id).then(() => {
+                        this.refresh();
+                        this.$message.success('删除成功');
+                    })
+                })
+            },
+            // 刷新
+            refresh() {
+                this.getList(this.page)
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

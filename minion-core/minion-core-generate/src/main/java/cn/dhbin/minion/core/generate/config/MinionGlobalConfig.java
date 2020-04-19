@@ -1,8 +1,10 @@
 package cn.dhbin.minion.core.generate.config;
 
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,10 +16,8 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 public class MinionGlobalConfig extends GlobalConfig {
 
-    /**
-     * 导出根目录
-     */
-    private String rootPath = System.getProperty("user.dir");
+    @Setter(value = AccessLevel.PRIVATE)
+    private String rootPath = System.getProperty("user.dir") + "/generate";
 
     /**
      * java文件的输出目录
@@ -28,6 +28,11 @@ public class MinionGlobalConfig extends GlobalConfig {
      * 资源文件路径
      */
     private String resourcesPath = rootPath + "/src/main/resources";
+
+    /**
+     * 前端文件路径
+     */
+    private String frontPath = rootPath + "/front/src";
 
 
 }

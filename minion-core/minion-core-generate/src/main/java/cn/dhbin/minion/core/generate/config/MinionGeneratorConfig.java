@@ -20,7 +20,7 @@ public class MinionGeneratorConfig {
         strategyConfig.setSuperServiceImplClass("cn.dhbin.minion.core.mybatis.service.MinionServiceImpl");
         strategyConfig.setSuperMapperClass("cn.dhbin.minion.core.mybatis.mapper.MinionMapper");
         strategyConfig.setSuperEntityColumns("create_time", "update_time", "create_uid", "update_uid");
-        strategyConfig.setControllerMappingHyphenStyle(true);
+        strategyConfig.setControllerMappingHyphenStyle(false);
         strategyConfig.setEntityLombokModel(true);
         strategyConfig.setRestControllerStyle(true);
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);

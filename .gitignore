@@ -64,3 +64,6 @@ hs_err_pid*
 
 # exclude logs
 logs
+
+# generator default output file path
+generate

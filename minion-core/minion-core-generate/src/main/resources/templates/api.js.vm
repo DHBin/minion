@@ -1,0 +1,33 @@
+import request from '@/router/axios';
+import {baseUrl} from '@/config/env';
+
+export const fetchList = (query) => {
+    return request({
+        url: baseUrl + '#if(${package.ModuleName})/${package.ModuleName}#end/$!{firstLowerEntityName}',
+        method: 'get',
+        params: query
+    })
+};
+
+export const createObj = (data) => {
+    return request({
+        url: baseUrl + '#if(${package.ModuleName})/${package.ModuleName}#end/$!{firstLowerEntityName}',
+        method: 'post',
+        data: data
+    })
+};
+
+export const updateObj = (data) => {
+    return request({
+        url: baseUrl + '#if(${package.ModuleName})/${package.ModuleName}#end/$!{firstLowerEntityName}',
+        method: 'put',
+        data: data
+    })
+};
+
+export const deleteObj = (id) => {
+    return request({
+        url: baseUrl + '#if(${package.ModuleName})/${package.ModuleName}/#end/$!{firstLowerEntityName}/' + id,
+        method: 'delete'
+    })
+};

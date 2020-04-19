@@ -60,7 +60,7 @@ private final $!{table.entityName}Service $!{firstLowerServiceName};
 * 分页获取
 */
 @GetMapping
-@ApiOperation(value = "分页获取 $!{table.comment}", authorizations = @Authorization("$!{table.name}_page}"))
+@ApiOperation(value = "分页获取 $!{table.comment}", authorizations = @Authorization("$!{table.name}_page"))
 public ApiResponse<?> page(PageModel<$!{table.entityName}> pageModel, $!{table.entityName}Query query){
         IPage<$!{table.entityName}Dto> record=this.$!{firstLowerServiceName}
         .page(pageModel.convert(),Wrappers.lambdaQuery(query.convert($!{table.entityName}.class)))

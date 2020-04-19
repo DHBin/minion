@@ -26,6 +26,10 @@ public class MinionInjectionConfig extends InjectionConfig {
         fileOutConfigs.add(new DtoFileOutConfig(globalConfig, packageConfig));
         fileOutConfigs.add(new ParamFileOutConfig(globalConfig, packageConfig));
         fileOutConfigs.add(new QueryFileOutConfig(globalConfig, packageConfig));
+        // 前端资源文件
+        fileOutConfigs.add(new ApiJsFileOutConfig(globalConfig, packageConfig));
+        fileOutConfigs.add(new ConstJsFileOutConfig(globalConfig, packageConfig));
+        fileOutConfigs.add(new ViewVueFileOutConfig(globalConfig, packageConfig));
         setFileOutConfigList(fileOutConfigs);
     }
 
