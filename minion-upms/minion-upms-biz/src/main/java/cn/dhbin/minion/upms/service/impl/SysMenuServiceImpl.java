@@ -107,6 +107,11 @@ public class SysMenuServiceImpl extends MinionServiceImpl<SysMenuMapper, SysMenu
         if (sysMenu.getParentNum() == null) {
             sysMenu.setParentNum(-1);
         }
+        SysMenu originalSysMenu = this.getById(sysMenu.getId());
+        // 更新子菜单的父num
+        this.lambdaUpdate().eq(SysMenu::getParentNum, originalSysMenu.getNum())
+                .set(SysMenu::getParentNum, sysMenu.getNum())
+                .update();
         this.updateByIdAndReturn(sysMenu);
         this.sysMenuPermService.updateByMenuId(sysMenu.getId(), perms);
     }
