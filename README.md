@@ -1,6 +1,6 @@
 # Minion
 
-[文档](https://fymd.gitee.io/)
+[文档](https://fymd.gitee.io/minion)
 
 ## 项目结构
 
