@@ -19,6 +19,16 @@ spring:
     active: @project.active@
 dubbo:
   application:
+    id: @artifactId@
     name: @artifactId@
+  scan:
+    base-packages: cn.dhbin.minion.upms.service.impl
+  protocol:
+    name: dubbo
+    port: 20880
+  registry:
+    address: zookeeper://minion-zookeeper:2181
+  metadata-report:
+    address: zookeeper://minion-zookeeper:2181
 mybatis-plus:
   type-enums-package: cn.dhbin.minion.upms.model.enums
