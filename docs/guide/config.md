@@ -1,6 +1,8 @@
 # 配置
 
-## 数据库
+## 组件
+
+### Mysql
 
 执行db目录下的sql
 
@@ -8,6 +10,21 @@
 minion_auth.sql
 minion_upms.sql
 ```
+
+### Zookeeper
+
+在Zookeeper官网下载[http://zookeeper.apache.org/releases.html](http://zookeeper.apache.org/releases.html)
+
+Zookeeper作Dubbo的注册中心
+
+使用默认端口
+
+### Nacos
+
+官网：[https://nacos.io/](https://nacos.io/)
+
+使用默认端口
+
 
 ## 环境配置
 
@@ -20,6 +37,8 @@ host添加对应组件IP
 127.0.0.1 minion-zookeeper
 127.0.0.1 minion
 ```
+
+开发环境推荐使用[SwitchHosts](https://github.com/oldj/SwitchHosts)
 
 ## 服务配置
 

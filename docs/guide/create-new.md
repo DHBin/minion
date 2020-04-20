@@ -154,6 +154,28 @@ spring:
 
 ### 配置
 
+## bootstrap.yml
+
+依赖dubbo向管理后台提供权限菜单，在管理后台点击`重载权限`即可
+
+```yaml
+dubbo:
+  application:
+    id: @artifactId@
+    name: @artifactId@
+  scan:
+    base-packages: 扫描服务类包路径
+  protocol:
+    name: dubbo
+    port: dubbo端口
+  registry:
+    address: zookeeper://minion-zookeeper:2181
+  metadata-report:
+    address: zookeeper://minion-zookeeper:2181
+```
+
+### Oauth2相关配置
+
 ```yaml
 security:
   oauth2:
