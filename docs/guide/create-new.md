@@ -154,9 +154,12 @@ spring:
 
 ### 配置
 
-## bootstrap.yml
+依赖dubbo向管理后台提供权限菜单，在管理后台点击`重载权限`，会自动加载RequestMappingHandlerMapping中的Url映射存储到DB中，同时缓存到Redis
 
-依赖dubbo向管理后台提供权限菜单，在管理后台点击`重载权限`即可
+详细参考代码生成器生成的代码
+
+
+#### bootstrap.yml
 
 ```yaml
 dubbo:
@@ -174,7 +177,7 @@ dubbo:
     address: zookeeper://minion-zookeeper:2181
 ```
 
-### Oauth2相关配置
+#### Oauth2相关配置
 
 ```yaml
 security:
