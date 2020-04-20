@@ -20,8 +20,8 @@
 </template>
 
 <script>
-    import {tableOption} from '@/const';
-    import {createObj, deleteObj, fetchList, updateObj} from '@/api'
+    import {tableOption} from '@/const#if(${package.ModuleName})/${package.ModuleName}#end/$!{firstLowerEntityName}';
+    import {createObj, deleteObj, fetchList, updateObj} from '@/api#if(${package.ModuleName})/${package.ModuleName}#end/$!{firstLowerEntityName}'
     import {mapGetters} from 'vuex'
 
     export default {
@@ -54,7 +54,7 @@
         },
         methods: {
             // dialog打开前回调
-            beforeOpen(done, type) {
+            beforeOpen(done) {
                 done();
             },
             // 获取列表
