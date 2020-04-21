@@ -1,3 +1,6 @@
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
 create schema minion_auth collate utf8mb4_unicode_ci;
 
 use minion_auth;
@@ -17,5 +20,7 @@ create table oauth_client_details
     refresh_token_validity  int           null,
     additional_information  varchar(4096) null,
     autoapprove             varchar(256)  null
-) charset = utf8;
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci;
 

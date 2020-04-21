@@ -1,6 +1,10 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+create schema minion_upms collate utf8mb4_unicode_ci;
+
+use minion_upms;
+
 -- ----------------------------
 -- Table structure for sys_menu
 -- ----------------------------
@@ -14,7 +18,7 @@ CREATE TABLE `sys_menu`
     `path`        varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '前端页面路径',
     `component`   varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '前端组件路径',
     `icon`        varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '菜单图标',
-    `num`         int(11)                                 NOT NULL COMMENT '编号',
+    `num`         int(11)                                 NOT NULL UNIQUE COMMENT '编号',
     `parent_num`  int(11)                                 NOT NULL COMMENT '父级编码',
     `order_num`   int(11)                                 NOT NULL COMMENT '顺序',
     `create_time` timestamp                               NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -67,7 +71,7 @@ INSERT INTO `sys_menu`
 VALUES (1241253984636362754, '删除角色', NULL, 3, '', '', '', 124, 12, 124, '2020-03-21 10:15:26', '2020-03-21 18:15:27',
         1240192515995959297, 1240867920893558785);
 INSERT INTO `sys_menu`
-VALUES (1241254140979044354, '删除用户', NULL, 3, '', '', '', 112, 11, 112, '2020-03-21 14:43:43', '2020-03-21 14:43:43',
+VALUES (1241254140979044354, '删除用户', NULL, 3, '', '', '', 113, 11, 113, '2020-03-21 14:43:43', '2020-03-21 14:43:43',
         1240192515995959297, 1240192515995959297);
 INSERT INTO `sys_menu`
 VALUES (1241254376820563969, '菜单列表', NULL, 3, '', '', '', 131, 13, 131, '2020-03-21 14:44:39', '2020-03-21 14:44:39',
