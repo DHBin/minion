@@ -8,7 +8,7 @@ RUN mkdir -p /minion-upms-biz
 
 WORKDIR /minion-upms-biz
 
-EXPOSE 9001
+EXPOSE 9002
 
 ADD ./target/minion-upms-biz.jar ./
 
