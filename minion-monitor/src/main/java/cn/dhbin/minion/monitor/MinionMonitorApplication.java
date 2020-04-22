@@ -1,4 +1,4 @@
-package cn.dhbin.monitor;
+package cn.dhbin.minion.monitor;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
