@@ -8,22 +8,83 @@
         <format>tar.gz</format>
         <format>zip</format>
     </formats>
+
+    <fileSets>
+        <!-- mysql -->
+        <fileSet>
+            <directory>config/db/mysql</directory>
+            <includes>
+                <include>*.sql</include>
+            </includes>
+            <outputDirectory>minion-mysql/db</outputDirectory>
+        </fileSet>
+        <!-- mysql end-->
+    </fileSets>
+
     <files>
+        <!-- docker -->
+        <file>
+            <source>config/nacos/Dockerfile</source>
+            <outputDirectory>minion-register/</outputDirectory>
+        </file>
+        <!-- docker end -->
+
+        <!-- docker -->
+        <file>
+            <source>config/docker-compose.yml</source>
+            <outputDirectory>.</outputDirectory>
+        </file>
+        <!-- docker end -->
+
+        <!-- mysql -->
+        <file>
+            <source>config/db/mysql/Dockerfile</source>
+            <outputDirectory>minion-mysql/</outputDirectory>
+        </file>
+        <!-- mysql end -->
+
+        <!-- minion-auth-biz -->
         <file>
             <source>../minion-auth/minion-auth-biz/target/minion-auth-biz.jar</source>
-            <outputDirectory>target/</outputDirectory>
+            <outputDirectory>minion-auth-biz/target</outputDirectory>
         </file>
+        <file>
+            <source>../minion-auth/minion-auth-biz/Dockerfile</source>
+            <outputDirectory>minion-auth-biz</outputDirectory>
+        </file>
+        <!-- minion-auth-biz end-->
+
+        <!-- minion-gateway -->
         <file>
             <source>../minion-gateway/target/minion-gateway.jar</source>
-            <outputDirectory>target/</outputDirectory>
+            <outputDirectory>minion-gateway/target</outputDirectory>
         </file>
+        <file>
+            <source>../minion-gateway/Dockerfile</source>
+            <outputDirectory>minion-gateway</outputDirectory>
+        </file>
+        <!-- minion-gateway end-->
+
+        <!-- minion-upms-biz -->
         <file>
             <source>../minion-upms/minion-upms-biz/target/minion-upms-biz.jar</source>
-            <outputDirectory>target/</outputDirectory>
+            <outputDirectory>minion-upms-biz/target</outputDirectory>
         </file>
         <file>
-            <source>../minion-monitor/target/minion-monitor.jar</source>
-            <outputDirectory>target/</outputDirectory>
+            <source>../minion-upms/minion-upms-biz/Dockerfile</source>
+            <outputDirectory>minion-upms-biz</outputDirectory>
         </file>
+        <!-- minion-upms-biz end -->
+
+        <!-- minion-monitor -->
+        <file>
+            <source>../minion-monitor/target/minion-monitor.jar</source>
+            <outputDirectory>minion-monitor/target</outputDirectory>
+        </file>
+        <file>
+            <source>../minion-monitor/Dockerfile</source>
+            <outputDirectory>minion-monitor</outputDirectory>
+        </file>
+        <!-- minion-monitor end -->
     </files>
 </assembly>

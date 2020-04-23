@@ -1,0 +1,85 @@
+version: '2'
+services:
+  minion-mysql:
+    build:
+      context: ./minion-mysql
+    restart: always
+    image: minion-mysql
+    container_name: minion-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+  minion-register:
+    build:
+      context: ./minion-register
+    image: minion-register
+    container_name: minion-register
+    environment:
+      PREFER_HOST_MODE: hostname
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: minion-mysql
+      MYSQL_SERVICE_DB_NAME: nacos_config
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: root
+    ports:
+      - "8848:8848"
+      - "9555:9555"
+    restart: always
+    depends_on:
+      - minion-mysql
+  minion-zookeeper:
+    container_name: minion-zookeeper
+    image: zookeeper:3.6.0
+    restart: always
+  minion-redis:
+    container_name: minion-redis
+    image: redis:5.0.7
+    restart: always
+    ports:
+      - 6379:6379
+  minion-gateway:
+    build:
+      context: ./minion-gateway
+    restart: always
+    image: minion-gateway
+    container_name: minion-gateway
+    ports:
+      - 9000:9000
+    depends_on:
+      - minion-redis
+      - minion-register
+  minion-auth-biz:
+    build:
+      context: ./minion-auth-biz
+    restart: always
+    image: minion-auth-biz
+    container_name: minion-auth-biz
+    ports:
+      - 9001:9001
+    depends_on:
+      - minion-register
+      - minion-redis
+      - minion-zookeeper
+  minion-upms-biz:
+    build:
+      context: ./minion-upms-biz
+    restart: always
+    image: minion-upms-biz
+    container_name: minion-upms-biz
+    ports:
+      - 9002:9002
+    depends_on:
+      - minion-register
+      - minion-redis
+      - minion-zookeeper
+  minion-monitor:
+    build:
+      context: ./minion-monitor
+    restart: always
+    image: minion-monitor
+    container_name: minion-monitor
+    ports:
+      - 9003:9003

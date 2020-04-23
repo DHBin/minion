@@ -2,14 +2,23 @@ FROM anapsix/alpine-java:8_server-jre_unlimited
 
 MAINTAINER admin@spring-boot.cn
 
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ENV DOCKERIZE_VERSION v0.6.1
 
-RUN mkdir -p /minion-upms-biz
+ENV PROGRAM_NAME minion-upms-biz
 
-WORKDIR /minion-upms-biz
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && mkdir -p /${PROGRAM_NAME} \
+    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && apk add --no-cache openssl\
+    && wget http://106.52.116.231:9527/dockerize/${DOCKERIZE_VERSION}/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+WORKDIR /${PROGRAM_NAME}
 
 EXPOSE 9002
 
-ADD ./target/minion-upms-biz.jar ./
+ADD ./target/${PROGRAM_NAME}.jar ./
 
-CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar minion-upms-biz.jar
+CMD dockerize -wait tcp://minion-register:8848 -wait tcp://minion-zookeeper:2181 -wait tcp://minion-mysql:3306 -wait tcp://minion-redis:6379 -timeout 1800s\
+     java -Xms128m -Xmx256m -Djava.security.egd=file:/dev/./urandom -jar ${PROGRAM_NAME}.jar
