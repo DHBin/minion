@@ -2,8 +2,6 @@ FROM nacos/nacos-server:1.2.1
 
 MAINTAINER admin@spring-boot.cn
 
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai
-
 ENV DOCKERIZE_VERSION v0.6.1
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \

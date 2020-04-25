@@ -1,4 +1,4 @@
-FROM anapsix/alpine-java:8_server-jre_unlimited
+FROM openjdk:8-jre
 
 MAINTAINER admin@spring-boot.cn
 
@@ -7,12 +7,9 @@ ENV DOCKERIZE_VERSION v0.6.1
 ENV PROGRAM_NAME minion-upms-biz
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && mkdir -p /${PROGRAM_NAME} \
-    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && apk add --no-cache openssl\
-    && wget http://106.52.116.231:9527/dockerize/${DOCKERIZE_VERSION}/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+    && wget http://106.52.116.231:9527/dockerize/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz \
+    && rm dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz
 
 WORKDIR /${PROGRAM_NAME}
 
