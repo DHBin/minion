@@ -24,3 +24,6 @@ create table oauth_client_details
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
 
+-- 数据
+INSERT INTO oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove) VALUES ('test', null, '{noop}test', 'all', 'password,refresh_token', null, null, null, null, null, 'true');
+
