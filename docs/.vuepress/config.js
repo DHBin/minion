@@ -21,7 +21,7 @@ function getGuideSidebar() {
     {
       title: '开始',
       collapsable: false,
-      children: ["", "structure", "config", "startup", "create-new", "code-generate"]
+      children: ["", "structure", "config", "startup", "create-new", "code-generate", "docker-compose-distribution"]
     }
   ]
 }
