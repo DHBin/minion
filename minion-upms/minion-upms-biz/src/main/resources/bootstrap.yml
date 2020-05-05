@@ -30,5 +30,7 @@ dubbo:
     address: zookeeper://minion-zookeeper:2181
   metadata-report:
     address: zookeeper://minion-zookeeper:2181
+  cloud:
+    subscribed-services: minion-auth-biz
 mybatis-plus:
   type-enums-package: cn.dhbin.minion.upms.model.enums
