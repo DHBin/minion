@@ -43,6 +43,18 @@
         </file>
         <!-- mysql end -->
 
+        <!-- redis -->
+        <file>
+            <source>config/redis/Dockerfile</source>
+            <outputDirectory>minion-redis/</outputDirectory>
+        </file>
+
+        <file>
+            <source>config/redis/redis.conf</source>
+            <outputDirectory>minion-redis/</outputDirectory>
+        </file>
+        <!-- redis end -->
+
         <!-- minion-auth-biz -->
         <file>
             <source>../minion-auth/minion-auth-biz/target/minion-auth-biz.jar</source>

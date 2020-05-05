@@ -7,7 +7,7 @@ services:
     image: minion-mysql
     container_name: minion-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: minion_mysql
     ports:
       - 3306:3306
   minion-register:
@@ -23,7 +23,7 @@ services:
       MYSQL_SERVICE_DB_NAME: nacos_config
       MYSQL_SERVICE_PORT: 3306
       MYSQL_SERVICE_USER: root
-      MYSQL_SERVICE_PASSWORD: root
+      MYSQL_SERVICE_PASSWORD: minion_mysql
     ports:
       - "8848:8848"
       - "9555:9555"
@@ -35,8 +35,10 @@ services:
     image: zookeeper:3.6.0
     restart: always
   minion-redis:
+    build:
+      context: ./minion-redis
     container_name: minion-redis
-    image: redis:5.0.7
+    image: minion-redis
     restart: always
     ports:
       - 6379:6379
