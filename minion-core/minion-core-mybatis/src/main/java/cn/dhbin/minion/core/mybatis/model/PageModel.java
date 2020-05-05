@@ -1,6 +1,7 @@
 package cn.dhbin.minion.core.mybatis.model;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.Data;
 import lombok.ToString;
 
 /**
@@ -10,35 +11,19 @@ import lombok.ToString;
  * @date 2019/8/27
  */
 @ToString
+@Data
 public class PageModel<T> implements IPageModel<Page<T>> {
 
     /**
      * 页大小
      */
-    private long size = 10;
+    private Integer size = 10;
 
     /**
      * 当前页
      */
-    private long current = 1;
+    private Integer current = 1;
 
-    @Override
-    public long getSize() {
-        return this.size;
-    }
-
-    @Override
-    public long getCurrent() {
-        return this.current;
-    }
-
-    public void setSize(long size) {
-        this.size = size;
-    }
-
-    public void setCurrent(long current) {
-        this.current = current;
-    }
 
     @Override
     public Page<T> convert() {

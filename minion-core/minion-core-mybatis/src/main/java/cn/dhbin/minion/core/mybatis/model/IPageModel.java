@@ -13,14 +13,14 @@ public interface IPageModel<T> {
      *
      * @return 页大小
      */
-    long getSize();
+    Integer getSize();
 
     /**
      * 获取当前页
      *
      * @return 当前页
      */
-    long getCurrent();
+    Integer getCurrent();
 
     /**
      * model -> T
