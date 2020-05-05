@@ -61,10 +61,10 @@ public class SysUserServiceImpl extends MinionServiceImpl<SysUserMapper, SysUser
         Integer count = this.lambdaQuery().eq(SysUser::getUsername, sysUser.getUsername()).count();
         ApiAssert.isFalse(ErrorCode.USERNAME_EXITED, count > 0);
         sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+        save(sysUser);
         if (CollUtil.isNotEmpty(roles)) {
             this.sysUserRoleService.updateUserRole(roles, sysUser.getId());
         }
-        save(sysUser);
     }
 
     @Override
