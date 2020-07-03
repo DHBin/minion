@@ -15,7 +15,7 @@ public class MinionServiceImpl<M extends MinionMapper<T>, T extends BaseEntity> 
     @Override
     public T updateByIdAndReturn(T entity) {
         boolean retBool = SqlHelper.retBool(getBaseMapper().updateById(entity));
-        return retBool ? entity : null;
+        return retBool ? getBaseMapper().selectById(entity) : null;
     }
 
 }
